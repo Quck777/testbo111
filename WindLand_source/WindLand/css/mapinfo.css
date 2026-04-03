@@ -1,0 +1,50 @@
+body {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 10px;
+	COLOR: white;
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+}
+.go-yes{
+	font-family : Tahoma, Verdana, Arial, Helvetica, Tahoma, Verdana, sans-serif;
+	text-decoration : none;
+	color : white;
+	font-size : 9px;
+	margin: 0px 0px 0px 0px;
+	background: #009900;
+}
+.go-no{
+	font-family : Tahoma, Verdana, Arial, Helvetica, Tahoma, Verdana, sans-serif;
+	text-decoration : none;
+	color : white;
+	font-size : 9px;
+	margin: 0px 0px 0px 0px;
+	background: #990000;
+}
+.go-bots{
+	font-family : Tahoma, Verdana, Arial, Helvetica, Tahoma, Verdana, sans-serif;
+	text-decoration : none;
+	color : white;
+	font-size : 9px;
+	margin: 0px 0px 0px 0px;
+	background: #000099;
+}
+.Bot-info{
+	font-family : Tahoma, Verdana, Arial, Helvetica, Tahoma, Verdana, sans-serif;
+	text-decoration : none;
+	color : white;
+	font-size : 9px;
+	margin: 0px 0px 0px 0px;
+	background: #999999;	
+}
+.loc-info{
+	font-family : Tahoma, Verdana, Arial, Helvetica, Tahoma, Verdana, sans-serif;
+	text-decoration : none;
+	color : white;
+	font-size : 9px;
+	margin: 0px 0px 0px 0px;
+	background: #009900;	
+    top: 75px; /* Расстояние от верхнего края */ 
+    bottom: 0; /* Расстояние снизу  */
+}
+#tooltip{background:#fff;border:1px solid #999;color:#333;font: 12px Tahoma;margin:0;padding:3px 5px;position:absolute;z-index:10;}
+tooltip{background:#fff;border:1px solid #999;color:#333;font: 12px Tahoma;margin:0;padding:3px 5px;position:absolute;z-index:10;}

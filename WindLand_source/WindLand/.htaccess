@@ -1,0 +1,18 @@
+##############################
+#### Mod Joe. 13.04.2013 #####
+##############################
+
+AddDefaultCharset Windows-1251
+Options -Indexes
+
+#Order Deny,Allow
+#Deny from all
+#Allow from 46.211.182.180 # !!!
+#Allow from localhost
+
+# Баним нубов по ип
+deny from 46.174.122.95
+
+Order allow,deny
+allow from all
+Deny from 188.168.204.46

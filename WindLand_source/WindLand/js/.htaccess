@@ -1,0 +1,5 @@
+Deny From All
+
+<Files "*.js">
+	Allow From All
+</Files>
