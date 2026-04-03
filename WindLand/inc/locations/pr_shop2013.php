@@ -116,7 +116,7 @@ if ( isset($http->post['id']) )
 
 	$presents = $db->sql("SELECT * FROM `presents` WHERE `type`=". TYPE ." ORDER BY `price` ASC");
 	$i=0;
-	while( $p = mysql_fetch_assoc($presents) )
+	while( $p = $db->fetchAssoc($presents) )
 	{
 		if ($i%4==0) echo "<tr>";
 		echo "<td class=but width=200 align=center><font class=user>".$p['name']."</font><br><img src='http://".IMG."/presents/".$p['image'].".jpg'><br><font class=items><b>".$p['price']." LN</b></font><br><input type=radio value=".$p['id']." name=id></td>";

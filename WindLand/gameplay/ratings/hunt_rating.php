@@ -13,7 +13,7 @@ $res = $db->sql("SELECT sign,user,aura,level,state,exp,losses,victories,money,ui
   (sp10) DESC LIMIT 0 , 50");
 $top = "var list=new Array(\n";
 $i=0;
-while ($r=mysql_fetch_array($res)) 
+while ($r=$db->fetchArray($res)) 
 {
 
  $stats = floor($r["sp10"]);

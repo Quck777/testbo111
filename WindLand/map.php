@@ -17,7 +17,7 @@ echo'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <link type="text/css" rel="stylesheet" href="/css/mapinfo.css" />
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>WindLand - Карта земель</title>
 
 </head>

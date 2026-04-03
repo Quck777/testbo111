@@ -11,7 +11,7 @@ session_start();
 <head>
 	<LINK href="/css/main_v2.css" rel="stylesheet" type="text/css">
 	<title>Регистрация</title>
-	<meta http-equiv=content-type content='text/html; charset=windows-1251'>
+	<meta http-equiv=content-type content='text/html; charset=UTF-8'>
 	<SCRIPT src="/js/reg.js"></SCRIPT>
 </head>
 <body>

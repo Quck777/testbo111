@@ -123,7 +123,7 @@ if (!$player->AuraSpecial[15])
 $lavka = 1;
 $enures= $db->sql("SELECT * FROM `weapons` WHERE p_type=5 or p_type=13 or p_type=18 ORDER BY `price` ASC", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
 echo "<form action=main.php onsubmit='return false;' name=lavka1>";
-while ($v=mysql_fetch_array ($enures))
+while ($v=$db->fetchArray($enures))
 {
 	echo "<center><div class=but style='width:80%'><div style='text-align:left;'>";
 	if ($v["price"]>$player->pers["money"]) echo '<font class=hp>Не хватает денег</font> ';

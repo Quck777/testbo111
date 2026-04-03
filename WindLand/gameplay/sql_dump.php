@@ -111,7 +111,7 @@ class dumper {
 		$tables = array();
         $result = mysql_query("SHOW TABLES");
 		$all = 0;
-        while($row = mysql_fetch_array($result)) {
+        while($row = $db->fetchArray($result)) {
 			$status = 0;
 			if (!empty($tbls)) {
 			    foreach($tbls AS $table){
@@ -141,7 +141,7 @@ class dumper {
 		$tabinfo = array();
 		$tabinfo[0] = 0;
 		$info = '';
-		while($item = mysql_fetch_assoc($result)){
+		while($item = $db->fetchAssoc($result)){
 			if(in_array($item['Name'], $tables)) {
 				$item['Rows'] = empty($item['Rows']) ? 0 : $item['Rows'];
 				$tabinfo[0] += $item['Rows'];
@@ -165,14 +165,14 @@ class dumper {
 
         	// Создание таблицы
 			$result = mysql_query("SHOW CREATE TABLE {$table}");
-        	$tab = mysql_fetch_array($result);
+        	$tab = $db->fetchArray($result);
 			$tab = preg_replace('/(default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP|DEFAULT CHARSET=\w+|COLLATE=\w+|character set \w+|collate \w+)/i', '/*!40101 \\1 */', $tab);
         	$this->fn_write($fp, "DROP TABLE IF EXISTS {$table};\n{$tab[1]};\n\n");
         	// Опредеделяем типы столбцов
             $NumericColumn = array();
             $result = mysql_query("SHOW COLUMNS FROM {$table}");
             $field = 0;
-            while($col = mysql_fetch_row($result)) {
+            while($col = $db->fetchRow($result)) {
             	$NumericColumn[$field++] = preg_match("/^(\w*int|year)/", $col[1]) ? 1 : 0;
             }
 			$fields = $field;
@@ -186,7 +186,7 @@ class dumper {
 			$i = 0;
 			$this->fn_write($fp, "INSERT INTO `{$table}` VALUES");
             while(($result = mysql_query("SELECT * FROM {$table} LIMIT {$from}, {$limit}")) && ($total = mysql_num_rows($result))){
-            		while($row = mysql_fetch_row($result)) {
+            		while($row = $db->fetchRow($result)) {
                     	$i++;
     					$t++;
 
@@ -420,7 +420,7 @@ class dumper {
 		else {
     		$result = mysql_query("SHOW DATABASES");
     		$dbs = array();
-    		while($item = mysql_fetch_array($result)){
+    		while($item = $db->fetchArray($result)){
     			if (mysql_select_db($item[0])) {
     				$tables = mysql_query("SHOW TABLES");
     				if ($tables) {

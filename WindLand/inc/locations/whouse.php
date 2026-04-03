@@ -147,7 +147,7 @@ function add_form(){
   {
     echo '<div align=center><table width=800>';
     $sql = $db->sql('SELECT * FROM `wp` WHERE `uidp`= '.UID.' AND `stype`="'.$stype.'" AND weared=0 AND `auction` <> 1');
-    while ($res = mysql_fetch_array($sql)){
+    while ($res = $db->fetchArray($sql)){
       echo '<tr><td  class=weapons_box>';
       $vesh = $res;
       $lavka = 0;
@@ -248,7 +248,7 @@ function my_lots()
   if ($num > 0){
     $sql = $db->sql('SELECT * FROM `wp` WHERE `uidp`='.UID.' AND `auction`=1');
     echo '<div align=center><table width=800>';
-    while ($res = mysql_fetch_array($sql)){
+    while ($res = $db->fetchArray($sql)){
       echo '<tr><td  class=weapons_box>';
       $vesh = $res;
       $lavka = 0;
@@ -276,7 +276,7 @@ function my_up_lots(){
   if ($num > 0){
     $sql = $db->sql('SELECT `id` FROM `auction` WHERE `wanner`='.UID.' AND `wanner`<>`owner`');
     echo '<div align=center><table width=800>';
-    while ($r = mysql_fetch_array($sql))
+    while ($r = $db->fetchArray($sql))
 	{
       $zapr = $db->sqla('SELECT * FROM `wp` WHERE id='.$r['id']);
       echo '<tr><td  class=weapons_box>';
@@ -307,7 +307,7 @@ function end_auction()
   $num = $db->sqlr($sql);
   if ($num > 0){
     $sql = $db->sql('SELECT * FROM `auction` WHERE time < '.$cur_time);
-    while ($zapr = mysql_fetch_array($sql))
+    while ($zapr = $db->fetchArray($sql))
 	{
       if ($zapr['wanner'] != $zapr['owner']){
         $us = $db->sqla('SELECT `user` FROM `users` WHERE `uid`='.$zapr['wanner']);
@@ -369,7 +369,7 @@ function torgi()
   if ($num > 0){
     echo '<div align=center><table width=800>';
     $sql = $db->sql('SELECT * FROM `wp` WHERE `auction` = 1');
-    while ($res = mysql_fetch_array($sql)){
+    while ($res = $db->fetchArray($sql)){
       echo '<tr><td class=weapons_box>';
       $vesh = $res;
       $lavka = 0;

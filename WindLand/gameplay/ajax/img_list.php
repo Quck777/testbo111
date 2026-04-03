@@ -11,7 +11,7 @@
 	$sql = mysql_query('SELECT `address` FROM `images` WHERE `stype`="'.addslashes($_GET['type']).'" ');
 	
 	$check = 1;
-	while($s = mysql_fetch_row($sql) and $check++)
+	while($s = $db->fetchRow($sql) and $check++)
 		echo $s[0].'|';
 	if ($check==1) echo 'none';
 	

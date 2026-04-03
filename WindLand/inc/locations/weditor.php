@@ -38,7 +38,7 @@ if (empty($http->post) and empty($http->get["id"]))
 	echo "<center class=but><I class=timef>Ваши вещи, доступные для улучшения:</I></center>";
 	echo "<center>";
 	echo "<table border=0 width=80%>";
-	while($v = mysql_fetch_array($vs,MYSQL_ASSOC))
+	while($v = $db->fetchArray($vs,MYSQL_ASSOC))
 	{
 		if (!IsWearing($v)) continue;
 		$vesh = $v;
@@ -194,7 +194,7 @@ if (empty($http->post) and isset($http->get["id"]) and isset($http->get["param"]
 		{
 			$yours = $db->sql("SELECT id,durability FROM wp WHERE uidp=".UID." and type='resources' and image='resources/".$r["image"]."'");
 			$tmp = 0;
-			while($yr = mysql_fetch_array($yours) and $tmp<$k)
+			while($yr = $db->fetchArray($yours) and $tmp<$k)
 			{
 				$tmp += $yr["durability"];
 				if ($tmp<$k)
@@ -219,7 +219,7 @@ if (empty($http->post) and isset($http->get["id"]) and isset($http->get["param"]
 			$yours = $db->sql("SELECT id,durability FROM wp WHERE uidp=".UID." and type='resources' and image='resources/".$r["image"]."'");
 			$tmp = 0;
 			$k = round($k/2);
-			while($yr = mysql_fetch_array($yours) and $tmp<$k)
+			while($yr = $db->fetchArray($yours) and $tmp<$k)
 			{
 				$tmp += $yr["durability"];
 				if ($tmp<$k)

@@ -21,7 +21,7 @@ if ($p15<>1) exit;
 		
 		echo "<form method=post name=ips><table border='1' cellspacing='0' cellpadding='0' bordercolorlight=#C0C0C0 bordercolordark=#FFFFFF bgcolor=#F5F5F5 align=center>";
 		$ips = $db->sql("SELECT * FROM `logs_ips_in` WHERE `uid`=".$player->pers["uid"]." ORDER BY `date` DESC;");
-		while( $ip = mysql_fetch_assoc($ips) )
+		while( $ip = $db->fetchAssoc($ips) )
 		{
 			echo "<tr align=center>";
 			echo "<td width=10><input type=checkbox name=ip_".$ip['date']." value=1></td>";
@@ -44,7 +44,7 @@ if ($p15<>1) exit;
 			$ips = $db->sql("SELECT `ip` FROM `logs_ips_in` WHERE uid=".$player->pers["uid"]." and (".$q.")");
 			$q = '';
 			$ch_str = '';
-			while ($ip = mysql_fetch_assoc($ips))
+			while ($ip = $db->fetchAssoc($ips))
 			if (!substr_count($ch_str,"<".$ip["ip"].">"))
 			{
 				$q.= "`ip`='".$ip["ip"]."' or ";
@@ -55,7 +55,7 @@ if ($p15<>1) exit;
 			$mults = $db->sql("SELECT uid,date FROM logs_ips_in WHERE uid<>".$player->pers["uid"]." and (".$q.")");
 			$counter = 0;
 			echo '<table border="1" cellspacing="0" cellpadding="0" bordercolorlight=#C0C0C0 bordercolordark=#FFFFFF bgcolor=#F5F5F5 align=center>';
-			while ($mult = mysql_fetch_assoc($mults) and ($counter++ +1))
+			while ($mult = $db->fetchAssoc($mults) and ($counter++ +1))
 			{
 				$m = $db->sqla("SELECT `user`,`level`,`sign` FROM `users` WHERE `uid`=".$mult["uid"]."");
 				echo"<tr>";

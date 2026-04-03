@@ -5,7 +5,7 @@ include "quests.php";
 echo "<br><hr><br><b class=about>–ечЄвки</b>";
 $sps = $db->sql("SELECT * FROM speech WHERE id_from=0");
 echo "<table class=fightlong width=100% border=0>";
-while($sp = mysql_fetch_array($sps))
+while($sp = $db->fetchArray($sps))
 {
 	echo show_speech($sp);
 }

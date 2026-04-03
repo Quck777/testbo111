@@ -13,7 +13,7 @@ if (isset($http->post["scroll"]))
 
 	if ($user_loc_c>0)
 	{
-		while($us = mysql_fetch_assoc($user_loc)) {
+		while($us = $db->fetchAssoc($user_loc)) {
 
 		$db->sql("UPDATE p_auras SET esttime=0 WHERE uid=".$us["uid"]." and special>1 and special<3 and esttime>".tme().";");
 		$db->sql("UPDATE users SET invisible=0 WHERE uid=".$us["uid"]."");
@@ -93,7 +93,7 @@ if (!empty($http->post["potion"]))
 	$acount = $db->sqlr("SELECT COUNT(*) FROM p_auras WHERE uid=".$player->pers["uid"]." and `name`='".$zakl["name"]."'");
 	$Ppers = $player->pers;
 	$potions = $db->sql("SELECT params FROM p_auras WHERE uid=".$player->pers["uid"]." and special=13");
-	while($p = mysql_fetch_assoc($potions))
+	while($p = $db->fetchAssoc($potions))
 	{
 		$_p = explode("@",$p["params"]);
 		foreach($_p as $__p)

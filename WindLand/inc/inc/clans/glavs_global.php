@@ -21,7 +21,7 @@ if ( $http->_post('zp_login') and $http->_post('zp_count') and $status=='wg' )
 ####### Ќачинаем обработку клиентской части
 $e_res = '';
 $res = $db->sql('SELECT * FROM `clans_souz` ORDER BY `date`;');
-while ( $r = mysql_fetch_assoc($res) )
+while ( $r = $db->fetchAssoc($res) )
 {
 	$conets = ($r['date']+$TIME_NO[$r['status']]) - tme();
 	$e_res.= (empty($e_res) ? '' : ',').'["'.$r['id'].'","'.$r['sign'].'","'.$r['name'].'","'.$r['sign2'].'","'.$r['name2'].'","'.tp($conets).'",'.$r['type'].','.$r['status'].','.$r['gonorar'].','.$r['count'].']';

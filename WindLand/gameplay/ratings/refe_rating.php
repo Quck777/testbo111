@@ -13,7 +13,7 @@ $res = $db->sql("SELECT sign,user,aura,level,state,exp,losses,victories,money,ui
   (referal_counter+referal_rcounter*3) DESC LIMIT 0 , 20");
 $top = "var list=new Array(\n";
 $i=0;
-while ($r=mysql_fetch_array($res)) 
+while ($r=$db->fetchArray($res)) 
 {
 
  $stats = floor($r["referal_counter"]+3*$r["referal_rcounter"]);

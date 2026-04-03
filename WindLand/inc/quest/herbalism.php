@@ -22,7 +22,7 @@ VALUES ('".$h["image"]."', '".$h["name"]."', '".(time()-HERBAL_GROW-1)."', '".$c
 	if (WEATHER==3) $herbal_grow*=2;
 	if (WEATHER==1 and date("m")>5 and date("m")<9) $herbal_grow*=3;
 	if (WEATHER==6) $herbal_grow/=3;
-	while ($h = mysql_fetch_array($res))
+	while ($h = $db->fetchArray($res))
 	{
 		if ($i%3==0) echo "<tr>";
 		echo "<td width=30% class=but align=center>

@@ -88,7 +88,7 @@ return $str;
 
 function sqla($q)
 {
-	return mysql_fetch_array(sql($q));
+	return $db->fetchArray(sql($q));
 }
 
 function sqlr($q,$count=0)
@@ -110,7 +110,7 @@ function sql($q)
 	if ($error and $_COOKIE["uid"]==5 and !$_ECHO_OFF)echo "<font class=hp><b> Œÿ»¡ ¿ MySQL!!! : ".$error." <i>[".$q."]</i></b></font>";
 	/*elseif ($error)
 	 {
-		$sql_errors = mysql_fetch_array(mysql_query("SELECT sql_errors FROM configs"));
+		$sql_errors = $db->fetchArray(mysql_query("SELECT sql_errors FROM configs"));
 		if (!substr_count($sql_errors[0],"<".$error." [".$q."]>")) mysql_query("UPDATE configs SET sql_errors='".$sql_errors[0]."<".addslashes($error)." [".addslashes($q)."]>"."'");
 	 }*/
 	$sql_queries_counter++;
@@ -384,7 +384,7 @@ function type_names($tp)
 function sqla_id( $q )
 {
     if (isset($q))
-        return mysql_fetch_row(sql($q));
+        return $db->fetchRow(sql($q));
     else return false;
 }
 

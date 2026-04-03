@@ -169,7 +169,7 @@ echo '
     $sql = $db->sql("SELECT * FROM `images` WHERE `uid`='".$player->pers["uid"]."'");
 	$demos = '<table border="0" cellspacing="1" cellpadding="10" width="100%" align="center"><tr>';
 	$igg = 0;
-	while($s = mysql_fetch_array($sql,MYSQL_ASSOC)){
+	while($s = $db->fetchArray($sql,MYSQL_ASSOC)){
 	$igg ++;
 	if (($igg+1)%4==0 and $igg!=0) $demos .=  '<tr>';
 	$demos .= '<td align="center" width="20%"><img src="http://woe.by/images/weapons/'.$s["address"].'">';
@@ -370,7 +370,7 @@ echo '<br>
 	$sql = $db->sql("SELECT `uid`,`address` FROM images WHERE `lavka`='test' and `type`=".intval($http->get["type"])." and `tip`='".$http->post["type"]."'");
 	$demos = '<table align=center border=0 width=100% class="coll w100 mar user_info">';
 	$im = 0;
-	while($s = mysql_fetch_array($sql,MYSQL_ASSOC))
+	while($s = $db->fetchArray($sql,MYSQL_ASSOC))
 	{
 		$im ++;
 		## Если  рисунок имеет айди перса, а айди перса != рисунку, убираем)
@@ -855,7 +855,7 @@ $kb .= '<option value="50">50</option>';
 	$sql = $db->sql("SELECT `uid`,`address` FROM images WHERE `lavka`='test' and `type`=".intval($http->get["type"])." and `tip`='".$http->post["type"]."'");
 	$demos = '<table align=center border=0 width=100% class="coll w100 mar user_info">';
 	$im = 0;
-	while($s = mysql_fetch_array($sql,MYSQL_ASSOC)){
+	while($s = $db->fetchArray($sql,MYSQL_ASSOC)){
 	$im ++;
 	## Если  рисунок имеет айди перса, а айди перса != рисунку, убираем)
 	if ($s["uid"]>0 and $s["uid"]!=$player->pers["uid"]) continue;

@@ -36,7 +36,7 @@ if ($rk[52]==0 and $status!='wg') exit('Доступ запрещен');
 		$cl = $db->sql("SELECT * FROM `clans` WHERE `sign`<>'watchers'");
 		echo "<table class=but width='90%'>";
 		$i = 1;
-		while($c = mysql_fetch_assoc($cl))
+		while($c = $db->fetchAssoc($cl))
 		{
 			$alg = $db->sqlr("SELECT `align` FROM `aligns` WHERE `align`='".$c['align']."' ;");
 			$aimg = ($alg != false) ? "<img src='http://".IMG."/signs/align/".$alg.".gif' width=15 height=12> " : '';
@@ -71,7 +71,7 @@ if ($rk[52]==0 and $status!='wg') exit('Доступ запрещен');
 
 		$usr = $db->sql('SELECT * FROM `users` WHERE `sign`="'.$clan['sign'].'" ORDER BY `clan_state` ASC;');
 		echo '<table border="0" cellpadding="0" cellspacing="0" align="center">';
-		while ( $us = mysql_fetch_assoc($usr) )
+		while ( $us = $db->fetchAssoc($usr) )
 		{
 			echo generate_sostav($us);
 		}

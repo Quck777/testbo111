@@ -31,7 +31,7 @@ if ( $http->_get('get_item') and $player->pers['clan_tr']==true )
 	else
 		$enures = $db->sql("SELECT * FROM `wp` WHERE `clan_sign`='".$player->pers['sign']."'");
 $check = 0;
-while ( $v=mysql_fetch_assoc($enures) ) 
+while ( $v=$db->fetchAssoc($enures) ) 
 {
 	if( $v['max_durability']==true and $v['durability']==false ) continue;
 	echo "<div class=but2>";

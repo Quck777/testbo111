@@ -38,7 +38,7 @@ if ($_persvs["bid"]>0 and mtrunc($_persvs["level"]-$_pers["level"]+6) and $fight
 			if ($_persvs["droptype"]==3)
 			{
 				$v = sql("SELECT name,id FROM weapons WHERE id=".$_persvs["dropvalue"]."");
-				$v = mysql_fetch_array($v);
+				$v = $db->fetchArray($v);
 				if (@$v["id"]) {
 				$res = "Обнаружено «".$v["name"]."» !";
 				insert_wp($v["id"],$_pers["uid"],-1,0,$_pers["user"]);
@@ -49,7 +49,7 @@ if ($_persvs["bid"]>0 and mtrunc($_persvs["level"]-$_pers["level"]+6) and $fight
 			if ($_persvs["droptype"]==4)
 			{
 				$v = sql("SELECT name,id FROM weapons WHERE id=".$_persvs["dropvalue"]."");
-				$v = mysql_fetch_array($v);
+				$v = $db->fetchArray($v);
 				if (@$v["id"]) {
 				$res = "Обнаружено «".$v["name"]." [Срок действия 1 день]» !";
 				$id = insert_wp($v["id"],$_pers["uid"],-1,0,$_pers["user"]);
@@ -61,7 +61,7 @@ if ($_persvs["bid"]>0 and mtrunc($_persvs["level"]-$_pers["level"]+6) and $fight
 			if ($_persvs["droptype"]==5)
 			{
 				$v = sql("SELECT name,id FROM weapons WHERE id=".$_persvs["dropvalue"]."");
-				$v = mysql_fetch_array($v);
+				$v = $db->fetchArray($v);
 				if (@$v["id"]) {
 				$res = "Обнаружено «".$v["name"]." [Срок действия 3 дня]» !";
 				$id = insert_wp($v["id"],$_pers["uid"],-1,0,$_pers["user"]);
@@ -73,7 +73,7 @@ if ($_persvs["bid"]>0 and mtrunc($_persvs["level"]-$_pers["level"]+6) and $fight
 			if ($_persvs["droptype"]==6)
 			{
 				$v = sql("SELECT name,id FROM weapons WHERE id=".$_persvs["dropvalue"]."");
-				$v = mysql_fetch_array($v);
+				$v = $db->fetchArray($v);
 				if (@$v["id"]) {
 				$res = "Обнаружено «".$v["name"]." [Срок действия 7 дней]» !";
 				$id = insert_wp($v["id"],$_pers["uid"],-1,0,$_pers["user"]);
@@ -85,7 +85,7 @@ if ($_persvs["bid"]>0 and mtrunc($_persvs["level"]-$_pers["level"]+6) and $fight
 			if ($_persvs["droptype"]==7)
 			{
 				$v = sql("SELECT name,id FROM weapons WHERE id=".$_persvs["dropvalue"]."");
-				$v = mysql_fetch_array($v);
+				$v = $db->fetchArray($v);
 				if (@$v["id"]) {
 				$res = "Обнаружено «".$v["name"]." [Срок действия 1 месяц]» !";
 				$id = insert_wp($v["id"],$_pers["uid"],-1,0,$_pers["user"]);
@@ -150,7 +150,7 @@ if ($_persvs["bid"]>0 and mtrunc($_persvs["level"]-$_pers["level"]+6) and $fight
 			$v = $db->sql("SELECT name,id FROM weapons WHERE id=".$shmotid[$shmotdrop]."", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
 			//say_to_chat('s','Запрос : <b>'.$shmotid[$shmotdrop].'</b>',1,$_pers["user"],'*',0);
 
-			$v = mysql_fetch_array($v);
+			$v = $db->fetchArray($v);
 			if (@$v["id"])
 			{
 				$res = "Обнаружено «".$v["name"]."» !";
@@ -168,7 +168,7 @@ if ($_persvs["bid"]>0 and mtrunc($_persvs["level"]-$_pers["level"]+6) and $fight
 			$v = $db->sql("SELECT name,id FROM weapons WHERE id=".$shmotid[$shmotdrop]."", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
 			//say_to_chat('s','Запрос : <b>'.$shmotid[$shmotdrop].'</b>',1,$_pers["user"],'*',0);
 
-			$v = mysql_fetch_array($v);
+			$v = $db->fetchArray($v);
 			if (@$v["id"])
 			{
 				$res = "Обнаружено «".$v["name"]."» !";
@@ -185,7 +185,7 @@ if ($_persvs["bid"]>0 and mtrunc($_persvs["level"]-$_pers["level"]+6) and $fight
 			$v = $db->sql("SELECT name,id FROM weapons WHERE id=".$shmotid[$shmotdrop]."", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
 			//say_to_chat('s','Запрос : <b>'.$shmotid[$shmotdrop].'</b>',1,$_pers["user"],'*',0);
 
-			$v = mysql_fetch_array($v);
+			$v = $db->fetchArray($v);
 			if (@$v["id"])
 			{
 				$res = "Обнаружено «".$v["name"]."» !";

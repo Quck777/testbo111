@@ -79,7 +79,7 @@ if ($player->pers["waiter"]<tme())
 		echo "Ќаши преподаватели готовы обучить вас многим боевым приЄмам! ќни попрос€т небольшое количество денег за это, но мы надеемс€ вас это не затруднит. ƒл€ обучени€ вам понадоб€тс€ пергаменты.";
 		echo "<center><table style='width: 80%' border=0 cellspasing=1 class=but>";
 		$spcls = $db->sql("SELECT * FROM special_dmg");
-		while($sp = mysql_fetch_array($spcls,MYSQL_ASSOC))
+		while($sp = $db->fetchArray($spcls,MYSQL_ASSOC))
 		{
 			echo "<tr><td class=but2><a href=main.php?cat=".$sp["od"]." class=bg>".$sp["name"]."</a></td></tr>";
 		}

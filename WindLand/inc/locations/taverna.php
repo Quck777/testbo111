@@ -138,7 +138,7 @@ if ( isset($_GET['go_friend']) )
 
 $rrr = '';
 $res = $db->sql('SELECT * FROM `taverna` WHERE `open`=1 and `level`<='.$player->pers['level'].' ORDER BY `price`;', __FILE__,__LINE__,__FUNCTION__,__CLASS__);
-while( $rs = mysql_fetch_assoc($res) )
+while( $rs = $db->fetchAssoc($res) )
 {
 	$rrr.= "[".$rs['id'].",'".$rs['name']."',['".$rs['params']."','".$rs['othodnak']."'],".$rs['count'].",".$rs['price'].", ".$rs['type']."],";
 }

@@ -6,7 +6,7 @@
 	if (empty($http->get["last"]) or $http->get["last"]=='all') $last = "";
 	$bs = $db->sql("SELECT * FROM `logs_one_comp_logins` WHERE (uid1=".$player->pers["uid"]." or uid2=".$player->pers["uid"].") ".$last);
 	echo '<table border="1" cellspacing="0" cellpadding="0" bordercolorlight=#C0C0C0 bordercolordark=#FFFFFF bgcolor=#F5F5F5 align=center>';
-	while($b = mysql_fetch_assoc($bs))
+	while($b = $db->fetchAssoc($bs))
 	{
 		$another = ($player->pers["uid"]==$b["uid1"])?$b["uid2"]:$b["uid1"];
 		$another = $db->sqlr("SELECT `user` FROM `users` WHERE `uid`=".intval($another));

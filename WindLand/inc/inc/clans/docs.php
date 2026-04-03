@@ -23,7 +23,7 @@ if ( isset($http->get['del']) and $glava )
 <?php
 
 $res = $db->sql('SELECT * FROM `document_orden` WHERE `sign` = "'.$clan['sign'].'";');
-while ( $r = mysql_fetch_assoc($res) )
+while ( $r = $db->fetchAssoc($res) )
 {
 	echo '<tr><td width="30%" valign="top">
 			<div style="text-align: center;">'.date('d.m.Y', $r['puttime']).'</div>

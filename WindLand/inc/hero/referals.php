@@ -34,7 +34,7 @@
 	echo '<table border="0" width="100%" cellspacing="0" cellpadding="0" class=LinedTable>';
 	$frs = sql("SELECT user,online,location,state,level,uid,rank_i,sign,ds FROM `users` WHERE referal_uid=".UID." ORDER BY `".$sort."` DESC LIMIT ".($c*30+1).",30");
 	$count = 1;
-	while ($perssost = mysql_fetch_array($frs)) 
+	while ($perssost = $db->fetchArray($frs)) 
 	{
 	echo"<tr>";
 	echo "<td class=ym>".($c*30+$count).".</td>";

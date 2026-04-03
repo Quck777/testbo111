@@ -4,7 +4,7 @@ if ($p22<>1) exit;
 	$pst = Array(); $dmt = Array();
 
 	$wclan = $db->sql("SELECT * FROM `clans_log` WHERE `uid`=".$player->pers['uid']."  ORDER BY `date` DESC");
-	while( $wc = mysql_fetch_assoc($wclan) )
+	while( $wc = $db->fetchAssoc($wclan) )
 	{
 		$cln = $db->sqlr('SELECT `name` FROM `clans` WHERE `sign`="'.$wc['sign'].'"');
 		if ($wc['type']==3 or $wc['type']==4) 

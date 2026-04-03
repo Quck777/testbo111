@@ -45,7 +45,7 @@ if ($p23<>1) exit;
 	$dur[3] = 0;
 	$dur[4] = 0;
 	$dur[5] = 0;
-	while($punish = mysql_fetch_assoc($punishs))
+	while($punish = $db->fetchAssoc($punishs))
 	{
 		if ($punish["type"]==1) {$color = '#FFDDDD';$tt = 'лнквюмхе';}
 		if ($punish["type"]==11) {$color = '#FFEEEE';$tt = 'яМЪРН лнквюмхе';}

@@ -62,9 +62,9 @@ if ($pers)
 	//$f_type = 0;
 	$perstowho = $pers["user"];
 	$bots = $db->sql("SELECT id,rank_i FROM bots WHERE id='".$bot_id."' or id='".$bot_id2."' or id='".$bot_id3."' and rank_i>".($pers["rank_i"]/10)." LIMIT 0,3");
-	$bot = mysql_fetch_array($bots);
-	$bot2 = mysql_fetch_array($bots);
-	$bot3 = mysql_fetch_array($bots);
+	$bot = $db->fetchArray($bots);
+	$bot2 = $db->fetchArray($bots);
+	$bot3 = $db->fetchArray($bots);
 	$b = 0;
 	if (@$bot["id"]) $b = $bot["id"];
 	if (@$bot2["id"]) $b = $bot2["id"];

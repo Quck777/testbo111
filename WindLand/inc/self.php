@@ -6,7 +6,7 @@
 		$headers = "From: ".$_SERVER['SERVER_NAME']." <".$email.">\r\n";   
 		$headers .= "Return-path: <".$email.">\r\n";
 		$headers .= "MIME-Version: 1.0\r\n";
-		$headers .= "Content-type: text/html; charset=windows-1251;\r\n";
+		$headers .= "Content-type: text/html; charset=UTF-8;\r\n";
 		$body.= '<br /><br />С Уважением, Администрация <a href=http://'.HOST.'/>'.$_SERVER['SERVER_NAME'].'</a> &copy;';
 		if( mail($to, $subject, $body, $headers) ) return true; else return false;
 	}

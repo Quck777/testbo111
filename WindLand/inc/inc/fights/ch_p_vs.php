@@ -4,7 +4,7 @@ $player->pers["cma"] = floor($player->pers["cma"]);
 
 $cans = $db->sql("SELECT uid2 FROM turns_f WHERE uid1=".$player->pers["uid"]."", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
 $uid_query = '';
-while ($c = mysql_fetch_array($cans)) $uid_query .= ' and uid<>'.$c["uid2"].'';
+while ($c = $db->fetchArray($cans)) $uid_query .= ' and uid<>'.$c["uid2"].'';
 
 if ($player->pers["chp"]>0)
 {

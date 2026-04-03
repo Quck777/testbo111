@@ -6,7 +6,7 @@ echo "<b class=about> вестологи</b>";
 $rsds = $db->sql("SELECT * FROM residents");
 
 echo "<table class=fightlong width=100% border=0>";
-while($rs = mysql_fetch_array($rsds))
+while($rs = $db->fetchArray($rsds))
 {
 	$b = $db->sqla("SELECT * FROM bots WHERE id=".$rs["id_bot"]);
 	echo "<tr>";

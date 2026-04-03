@@ -64,7 +64,7 @@ function generate_sostav($us)
 
 if ( isset($_GET['js']) )
 {
-	while ( $us = mysql_fetch_assoc($usr) )
+	while ( $us = $db->fetchAssoc($usr) )
 	{
 		$res = generate_sostav($us);
 		echo 'document.write("'.($res).'");'."\n";
@@ -77,7 +77,7 @@ if ( isset($_GET['js']) )
 <HTML>
 <HEAD>
 <TITLE>Информация о клане (<?php echo $clan['name'];?>)</TITLE>
-<META Content='text/html; charset=windows-1251' Http-Equiv=Content-type>
+<META Content='text/html; charset=UTF-8' Http-Equiv=Content-type>
 
 <LINK href='/css/main_v2.css' rel=STYLESHEET type=text/css>
 </HEAD>
@@ -85,7 +85,7 @@ if ( isset($_GET['js']) )
 	<h1 align="center"><?php echo $clan['name'];?></h1>
 	<table border="0" cellpadding="0" cellspacing="0" align="center">
 	<?php
-	while ( $us = mysql_fetch_assoc($usr) )
+	while ( $us = $db->fetchAssoc($usr) )
 	{
 		echo generate_sostav($us);
 	}

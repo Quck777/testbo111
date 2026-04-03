@@ -166,4 +166,68 @@ class MySQL
             $this->mysqli->close();
         }
     }
+    
+    /**
+     * Методы для совместимости со старым кодом (замена mysql_fetch_*)
+     */
+    
+    /**
+     * Аналог mysql_fetch_assoc - получает ассоциативный массив из результата
+     */
+    public function fetchAssoc($result): ?array
+    {
+        if ($result instanceof mysqli_result) {
+            return $result->fetch_assoc();
+        }
+        return null;
+    }
+    
+    /**
+     * Аналог mysql_fetch_array - получает массив из результата
+     */
+    public function fetchArray($result, $mode = MYSQLI_BOTH): ?array
+    {
+        if ($result instanceof mysqli_result) {
+            return $result->fetch_array($mode);
+        }
+        return null;
+    }
+    
+    /**
+     * Аналог mysql_fetch_row - получает нумерованный массив из результата
+     */
+    public function fetchRow($result): ?array
+    {
+        if ($result instanceof mysqli_result) {
+            return $result->fetch_row();
+        }
+        return null;
+    }
+    
+    /**
+     * Аналог mysql_result - получает значение из результата по полю
+     */
+    public function result(string $query, string $field, int $row = 0)
+    {
+        $res = $this->sql($query);
+        if ($res instanceof mysqli_result && $res->num_rows > $row) {
+            $res->data_seek($row);
+            $arr = $res->fetch_assoc();
+            return $arr[$field] ?? null;
+        }
+        return null;
+    }
+    
+    /**
+     * Аналог mysql_result для уже существующего ресурса
+     */
+    public function resultByRes($result, string $field, int $row = 0)
+    {
+        if ($result instanceof mysqli_result && $result->num_rows > $row) {
+            $result->data_seek($row);
+            $arr = $result->fetch_assoc();
+            return $arr[$field] ?? null;
+        }
+        return null;
+    }
 }

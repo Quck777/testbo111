@@ -55,7 +55,7 @@ class jQuest
 		
 		// Не рекомендуется вешать на одного НПС дофига квестов + ВЫДАСТ ТОЛЬКО 1 КВЕСТ
 		$quest = $this->db->sql('SELECT * FROM `jQuest_list` WHERE `nps_id` = '.$nps['qid'].';');
-		while ( $q = mysql_fetch_assoc($quest) )
+		while ( $q = $db->fetchAssoc($quest) )
 		{
 			// Проверка на ограничение по уровням
 			if ( ($q['min_level']>0 and $q['min_level']>$this->pers['level']) or ($q['max_level']>0 and $q['max_level']<$this->pers['level']) ) continue;
@@ -226,7 +226,7 @@ class jQuest
 	public function battle_action($bot)
 	{
 		$quest = $this->db->sql('SELECT * FROM `jQuest_users` WHERE `uid` = '.$this->pers['uid'].' and `finish` = 0 and (`job_type` = 1 or `job_type` = 2);');
-		while ( $q = mysql_fetch_assoc($quest) )
+		while ( $q = $db->fetchAssoc($quest) )
 		{
 			// Если бот не тот, прекращаем
 			if ( $q['job_botname'] != $bot['user'] ) continue;
@@ -253,7 +253,7 @@ class jQuest
 	public function inv_quest()
 	{
 		$quest = $this->db->sql('SELECT * FROM `jQuest_users` WHERE `uid` = '.$this->pers['uid'].' and `finish` = 0 and `job_type` = 3;');
-		while ( $q = mysql_fetch_assoc($quest) )
+		while ( $q = $db->fetchAssoc($quest) )
 		{
 			// Закрываем действие если уже выполнен квест
 			if ( $q['job_count'] == $q['job_result'] ) continue;
@@ -279,7 +279,7 @@ class jQuest
 	public function goloc_quest()
 	{
 		$quest = $this->db->sql('SELECT * FROM `jQuest_users` WHERE `uid` = '.$this->pers['uid'].' and `finish` = 0  and `job_type` = 4;');
-		while ( $q = mysql_fetch_assoc($quest) )
+		while ( $q = $db->fetchAssoc($quest) )
 		{
 			// Закрываем действие если уже выполнен квест
 			if ( $q['job_count'] == $q['job_result'] ) continue;

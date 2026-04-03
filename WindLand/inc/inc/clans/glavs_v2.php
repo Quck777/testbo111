@@ -205,7 +205,7 @@ if ( $http->_post('noclan_pass') and $status!='a' ) noclan( $http->_post('noclan
 ####### Начинаем обработку клиентской части
 $e_res = ''; $clan_obj = Array();
 $res = $db->sql('SELECT * FROM `clans_souz` WHERE `sign` = "'.$player->pers['sign'].'" or `sign2` = "'.$player->pers['sign'].'" ORDER BY `date`;');
-while ( $r = mysql_fetch_assoc($res) )
+while ( $r = $db->fetchAssoc($res) )
 {
 	$conets = ($r['date']+$TIME_NO[$r['status']]) - tme();
 	if ( $conets < 0 )
@@ -221,7 +221,7 @@ $c_list = '';
 if ( $status=='a' )
 {
 	$clans = $db->sql('SELECT `sign`, `name` FROM `clans` WHERE `sign` != "watchers" and `sign` != "'.$clan['sign'].'" ORDER BY `name` ASC;');
-	while ( $c = mysql_fetch_row($clans) ) { if ( $clan_obj[$c[0]] ) continue; $c_list.= (empty($c_list) ? '' : ',').'["'.$c[0].'","'.$c[1].'"]'; }
+	while ( $c = $db->fetchRow($clans) ) { if ( $clan_obj[$c[0]] ) continue; $c_list.= (empty($c_list) ? '' : ',').'["'.$c[0].'","'.$c[1].'"]'; }
 }
 
 //echo '<center>Тестовый режим.</center>';

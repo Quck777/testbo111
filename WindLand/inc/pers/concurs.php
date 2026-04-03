@@ -10,7 +10,7 @@ $priz2= 50;
 $res = $db->sql('SELECT * FROM `log_referals` WHERE `level`>'.($level-1).' and (`date`>'.$dn.' or `date`<'.$dk.') ORDER BY `uid`;');
 
 $rss = Array();
-while ( $r = mysql_fetch_assoc($res) )
+while ( $r = $db->fetchAssoc($res) )
 {
 	$p = $db->sqla('SELECT `user`,`level` FROM `users` WHERE `uid`='.$r['whoref'].' and `block`=""');
 	if ($p==false) continue;

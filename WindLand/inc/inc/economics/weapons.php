@@ -281,7 +281,7 @@ if (@$http->get["giveallH"] and isset($http->post["fornickname"]) and $http->pos
 	$herbals = $db->sql("SELECT weight,price,name,id FROM `wp` WHERE uidp=".$player->pers["uid"]." and weared=0 and type='herbal'");
 	if ($player->pers["location"]==$persto["location"])
 	{
-	while($v = mysql_fetch_array($herbals,MYSQL_ASSOC))
+	while($v = $db->fetchArray($herbals,MYSQL_ASSOC))
 	{
 		$db->sql("UPDATE wp SET uidp=".$persto["uid"]." WHERE id=".$v["id"]."");
 		set_vars ("weight_of_w=weight_of_w-".($v["weight"]),$player->pers["uid"]);

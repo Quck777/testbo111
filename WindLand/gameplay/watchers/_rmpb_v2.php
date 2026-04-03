@@ -21,7 +21,7 @@ $blocks = '';
 
 $molch = $db->sql('SELECT `date`,`type`,`reason`,`who` FROM `watch_punishments` WHERE `uid`='.$player->pers['uid'].' and (`type`=1 or `type`=2) ORDER BY `date`;');
 $r = '';
-while ($m = mysql_fetch_assoc($molch))
+while ($m = $db->fetchAssoc($molch))
 {
 	$d = str_replace(' ','&nbsp;', date('d.m.y H:i:s',$m['date']));
 	$r.= $d.'|'.$m['type'].'|'.$m['reason'].'|'.$m['who'].'@';

@@ -6,11 +6,11 @@ if( isset($_GET['gopers']) and $_GET["gopers"]=='ref_competition')
 	$dk = "30.10.2010";
 
 	$m = sql("SELECT user,referal_counter,referal_rcounter,level FROM `users` WHERE block='' ORDER BY (referal_rcounter*10+referal_counter*1000+level) DESC LIMIT 0,5");
-	$pm1 = mysql_fetch_array($m);
-	$pm2 = mysql_fetch_array($m);
-	$pm3 = mysql_fetch_array($m);
-	$pm4 = mysql_fetch_array($m);
-	$pm5 = mysql_fetch_array($m);
+	$pm1 = $db->fetchArray($m);
+	$pm2 = $db->fetchArray($m);
+	$pm3 = $db->fetchArray($m);
+	$pm4 = $db->fetchArray($m);
+	$pm5 = $db->fetchArray($m);
 
 
 	echo "<div class=but2>";

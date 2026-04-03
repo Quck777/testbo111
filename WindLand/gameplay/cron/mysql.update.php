@@ -23,7 +23,7 @@
 		$headers = "From: ".$_SERVER['SERVER_NAME']." <".$email.">\r\n";   
 		$headers .= "Return-path: <".$email.">\r\n";
 		$headers .= "MIME-Version: 1.0\r\n";
-		$headers .= "Content-type: text/html; charset=windows-1251;\r\n";
+		$headers .= "Content-type: text/html; charset=UTF-8;\r\n";
 		
 		$body.= '<br /><br />С Уважением, Администрация <a href=http://'.HTTP.'/>'.HTTP.'</a> &copy;';
 		
@@ -39,7 +39,7 @@
 	/*
 	### Ищем и удаляем хреновых юзеров
 	$bl = sql("SELECT `uid` FROM `users` WHERE `lastom`<(".time()."-(`level`+1)*1209600) and `lastom`>0 and `block`<>'' ORDER BY `uid`;");
-	while ( $b = mysql_fetch_assoc($bl) )
+	while ( $b = $db->fetchAssoc($bl) )
 	{
 		if ($b!=false)
 		{
@@ -59,7 +59,7 @@
 	### Напоминаем юзерам о игре
 	$isluser = $db->sql('SELECT `uid`,`user`,`email`,`pass`,`lastom` FROM `users` WHERE `lastom`<('.time().'-1814400) and `lastom`>0 and `block`="" and `action`<>-1 ORDER BY `uid`;');
 	$admin = $db->sqlr("SELECT `user` FROM `users` WHERE `uid`=7 and `online`=1 LIMIT 0,1;");
-	while ( $luser = mysql_fetch_assoc($isluser) )
+	while ( $luser = $db->fetchAssoc($isluser) )
 	{
 		if ( filter_var($luser['email'], FILTER_VALIDATE_EMAIL)==true )
 		{
@@ -106,7 +106,7 @@
 	$rm = round((microtime(true)-TMS),4);
 	echo $rm;
 	$usr = $db->sql('SELECT `user` FROM `users` WHERE `priveleged`=1 and `online`=1 ORDER BY `uid`;');
-	while ( $us = mysql_fetch_row($usr) ) say_to_chat ('m','Резервное копирование завершено. Затрачено времени <b>'.$rm.'</b> сек.',1,$us[0],'*',0);
+	while ( $us = $db->fetchRow($usr) ) say_to_chat ('m','Резервное копирование завершено. Затрачено времени <b>'.$rm.'</b> сек.',1,$us[0],'*',0);
 
 //	mysql_close();
 ?>

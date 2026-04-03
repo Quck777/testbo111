@@ -31,7 +31,7 @@ function show_speech($sp,$def=0)
 	
 	$sps = $db->sql("SELECT * FROM speech WHERE id_from=".$sp["id"]);
 	$table = '<table border=0 width=100% cellspacing=0 cellspadding=0 class=but>';
-	while($s = mysql_fetch_array($sps))
+	while($s = $db->fetchArray($sps))
 	{
 		$str = '';
 		if($s["action"]==1) $str = 'Перейти на речёвку';
@@ -62,7 +62,7 @@ function delete_sp($id)
 	GLOBAL $db;
 		$id = intval($id);
 		$_s = $db->sql("SELECT id FROM speech WHERE id_from=".$id);
-		while($s = mysql_fetch_array($_s))
+		while($s = $db->fetchArray($_s))
 		{
 			delete_sp($s["id"]);
 		}
@@ -81,7 +81,7 @@ if($priv["equests"])
 		$locs = $db->sql("SELECT id,name FROM locations");
 		$loc_select = '<select name=location>';
 		$loc_select .= '<option value=out SELECTED>ПРИРОДА</option>';
-		while($loc = mysql_fetch_array($locs))
+		while($loc = $db->fetchArray($locs))
 		{
 			$loc_select .= '<option value='.$loc["id"].'>'.$loc["name"].'</option>';	
 		}
@@ -188,7 +188,7 @@ VALUES
 	{
 		$rs = $db->sql("SELECT id,name FROM residents");
 		$rs_select = '<select name=rs>';
-		while($r = mysql_fetch_array($rs))
+		while($r = $db->fetchArray($rs))
 		{
 			$rs_select .= '<option value='.$r["id"].'>'.$r["name"].'</option>';	
 		}
@@ -224,7 +224,7 @@ VALUES (
 	{
 		$rs = $db->sql("SELECT id,name FROM residents");
 		$rs_select = '<select name=rs>';
-		while($r = mysql_fetch_array($rs))
+		while($r = $db->fetchArray($rs))
 		{
 			$rs_select .= '<option value='.$r["id"].'>'.$r["name"].'</option>';	
 		}
@@ -330,7 +330,7 @@ VALUES (
 		$sp = $db->sqla("SELECT * FROM speech WHERE id=".intval($_GET["spedit"]));
 		$rs = $db->sql("SELECT id,name,speechid FROM residents");
 		$rs_select = '<select name=rs>';
-		while($r = mysql_fetch_array($rs))
+		while($r = $db->fetchArray($rs))
 		{
 			if($r["speechid"]==$sp["id"])
 				$rs_select .= '<option value='.$r["id"].' SELECTED>'.$r["name"].'</option>';	

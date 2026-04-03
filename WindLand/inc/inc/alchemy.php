@@ -20,10 +20,10 @@
 		$rcount = $db->sqlr("SELECT COUNT(image) FROM `wp` WHERE `uidp`=".$player->pers["uid"]." and weared=0 and p_type=201");
 		$all = $db->sql ("SELECT image,name FROM `wp` WHERE `uidp`=".$player->pers["uid"]." and weared=0 
 		and p_type=201 ORDER BY image ASC");
-		$id1 = mysql_fetch_array($all);
-		$id2 = mysql_fetch_array($all);
-		$id3 = mysql_fetch_array($all);
-		$id4 = mysql_fetch_array($all);
+		$id1 = $db->fetchArray($all);
+		$id2 = $db->fetchArray($all);
+		$id3 = $db->fetchArray($all);
+		$id4 = $db->fetchArray($all);
 		$material = '';
 		$material_show = '';
 		if($id1[0])
@@ -52,7 +52,7 @@
 		$id3 = str_replace("herbals/","",$id3[0]);
 		$id4 = str_replace("herbals/","",$id4[0]);
 		$rsumm = $id1 + $id2 + $id3 + $id4;
-		while($tmp = mysql_fetch_array($all,MYSQL_ASSOC))
+		while($tmp = $db->fetchArray($all,MYSQL_ASSOC))
 		{
 			$rsumm += intval(str_replace("herbals/","",$tmp["image"]));
 			$material .= $id4["image"]."|";
@@ -179,7 +179,7 @@
 	$res = $db->sql("SELECT name,id,image FROM `wp` WHERE `uidp`=".$player->pers["uid"]." and weared=0 and p_type=201");
 	
 	echo "<center class=but><table width=70% border=0 class=LinedTable>";
-	while ($vesh=mysql_fetch_array($res))
+	while ($vesh=$db->fetchArray($res))
 	{
 		$tmp_id = str_replace("herbals/","",$vesh["image"]);
 		if ($tmp_id%2==0)
@@ -200,7 +200,7 @@
 echo "<center class=but><table width=90%>";
 $unique_herbal = '';
 $counter=0;
-while ($vesh=mysql_fetch_array($res))
+while ($vesh=$db->fetchArray($res))
 {
 	if (!substr_count($unique_herbal,substr($vesh["image"],8,8)))
 	{

@@ -12,7 +12,7 @@ if ($p24<>1) exit;
 	$dur[3] = 0;
 	$dur[4] = 0;
 	$dur[5] = 0;
-	while($rs = mysql_fetch_assoc($res))
+	while($rs = $db->fetchAssoc($res))
 	{
 		if ($rs['type']==1) {$color = '#FFDDDD';$tt = 'пшаюкйю';}
 		if ($rs['type']==2) {$color = '#FFEEEE';$tt = 'ьюурепярбн';}

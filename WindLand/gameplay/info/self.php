@@ -49,7 +49,7 @@ echo "<script>";
 $count_prs = $db->sqlr("SELECT COUNT(*) FROM presents_gived WHERE uid=".$player->pers["uid"],0);
 echo "var prs = [".$count_prs."";
 $prs = $db->sql("SELECT * FROM presents_gived WHERE uid=".$player->pers["uid"]);
-while ($p = mysql_fetch_assoc($prs))
+while ($p = $db->fetchAssoc($prs))
 {
 	$who = $p["who"];
 	if (!$preveleg and $p["anonymous"]) $who = 'Анонимно';

@@ -40,11 +40,11 @@ if(@$http->get["show_t1"] and !$t1["finished"] and $t1["type"]==0) // Турнир 1 5
 		for($i=0;$i<20;$i++)
 		{
 			$u1 = $u;
-			$u = mysql_fetch_array($users,MYSQL_ASSOC);
+			$u = $db->fetchArray($users,MYSQL_ASSOC);
 			if(!$u)
 			{
 				$can_join = 1;
-				$u = mysql_fetch_array($bots,MYSQL_ASSOC);
+				$u = $db->fetchArray($bots,MYSQL_ASSOC);
 				if(!$u)
 					$u = $u1;
 				$info = "<a href=binfo.php?".$u["id"]." target=_blank><img src=images/i.gif></a>";
@@ -85,7 +85,7 @@ elseif(@$http->get["show_t1"] and ($t1["type"]==1 or $t1["type"]==2) and !$t1["f
 			$start = "<b class=mfb>Начало через ".mtrunc(T_START2+$t1["time"]-tme())." сек.</b>";
 		$log = $db->sql("SELECT time,log FROM fight_log WHERE cfight=".$t1["lParam"]." ORDER BY turn DESC LIMIT 0,2");
 		$_LOG = '';
-		while ($l = mysql_fetch_array($log))
+		while ($l = $db->fetchArray($log))
 			$_LOG .= str_replace("'",'"',str_replace("%","<br><font class=timef>".$l["time"]."</font> ","<font class=timef>".$l["time"]."</font> ".$l["log"]))."<hr>";
 		$fight_res = $db->sqlr("SELECT result FROM fights WHERE id=".$t1["lParam"]."");
 		echo "<div class=but style='text-align:left;'>";

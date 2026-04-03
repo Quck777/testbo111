@@ -47,7 +47,7 @@ function HTML_selected_locate()
 		$_y = intval($lo[2]);
 	} else {$_x=0;$_y=0;}
 	
-	while ( $re = mysql_fetch_assoc($res) )
+	while ( $re = $db->fetchAssoc($res) )
 	{
 		$r.= '<option value="'.$re['fishing'].'_'.$re['x'].'_'.$re['y'].'" '.(($_x==$re['x'] and $_y==$re['y']) ? 'selected' : '').'>'.$re['name'].' ('.$re['x'].':'.$re['y'].')</option>';
 	}
@@ -59,7 +59,7 @@ function HTML_selected_fisher()
 	GLOBAL $db;
 	$res = $db->sql('SELECT `id`,`name` FROM `fish` ORDER BY `skill`');
 	$r = '';
-	while ( $re = mysql_fetch_row($res) )
+	while ( $re = $db->fetchRow($res) )
 	{
 		$r.= '<option value="'.$re[0].'" '.((@$_GET['fish']==$re[0]) ? 'selected' : '').'>'.$re[1].'</option>';
 	}
@@ -71,7 +71,7 @@ function HTML_view_locate($id)
 	GLOBAL $db;
 	$res = $db->sql('SELECT `name`,`x`,`y` FROM `nature` WHERE `fishing`='.$id);
 	$r = '';
-	while( $re = mysql_fetch_row($res) )
+	while( $re = $db->fetchRow($res) )
 	{
 		$r.= '<option>'.$re[0].' ('.$re[1].':'.$re[2].')</option>';
 	}
@@ -89,7 +89,7 @@ function HTML_view_primanka($id)
 <HTML>
 <HEAD>
 <TITLE>Калькулятор рыбалки (<?php echo $pers['user'];?>)</TITLE>
-<META Content='text/html; charset=windows-1251' Http-Equiv=Content-type>
+<META Content='text/html; charset=UTF-8' Http-Equiv=Content-type>
 
 <LINK href='/css/main_v2.css' rel=STYLESHEET type=text/css>
 </HEAD>
@@ -134,7 +134,7 @@ if ( isset($_GET['do']) )
 			`prim`=".(intval($mrim+1)%8+1)."
 		)
 		");
-		while ( $re = mysql_fetch_assoc($res) )
+		while ( $re = $db->fetchAssoc($res) )
 		{
 			$pr = round($re['price']+sqrt(sqrt($re['price']/2)*(6)),2);
 			$resourses.= '<tr> <td>'.$re['name'].'</td> <td>'.round($re['price'],2).' - '.$pr.'</td> </tr>';

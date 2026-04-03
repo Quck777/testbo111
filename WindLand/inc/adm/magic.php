@@ -68,7 +68,7 @@ if (@$_GET["c"]!=2)
  {
 	$zz = $db->sql("SELECT * FROM blasts");
 echo '<a href="main.php?new_wp=1" class=bga>мнбши ЛЮЦ.сДЮП б щрнл пюгдеке</a><table border="1" width="100%" cellspacing="0" cellpadding="0" bordercolorlight=#C0C0C0 bordercolordark=#FFFFFF class=LinedTable>';
-	while($z = mysql_fetch_array($zz))
+	while($z = $db->fetchArray($zz))
 	{
 		echo "<tr>";
 		echo "<td width=10><img src=http://".IMG."/drop.gif onclick='if(confirm(\"сдюкхрэ???\")) location=\"main.php?delete=".$z["id"]."\"' style='cursor:pointer'></td>";
@@ -88,7 +88,7 @@ echo "</table>";
  {
  	$zz = $db->sql("SELECT * FROM auras");
 	echo '<a href="main.php?new_ap=1&c=2" class=bga>мнбЮЪ ЮСПЮ б щрнл пюгдеке</a><table border="1" width="100%" cellspacing="0" cellpadding="0" bordercolorlight=#C0C0C0 bordercolordark=#FFFFFF class=LinedTable>';
-	while($z = mysql_fetch_array($zz))
+	while($z = $db->fetchArray($zz))
 	{
 		echo "<tr>";
 		echo "<td width=10><img src=http://".IMG."/drop.gif onclick='if(confirm(\"сдюкхрэ???\")) location=\"main.php?adelete=".$z["id"]."&c=2\"' style='cursor:pointer'></td>";

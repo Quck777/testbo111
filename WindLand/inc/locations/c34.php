@@ -13,7 +13,7 @@ $sostav = sql ("SELECT user,online,location FROM `users` WHERE `sign`='".$pers['
 $online = 0;
 $allpers = 0;
 
-while ($perssost = mysql_fetch_array($sostav)) 
+while ($perssost = $db->fetchArray($sostav)) 
 {
 $online += $perssost["online"];
 $allpers ++;

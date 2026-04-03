@@ -203,7 +203,7 @@ else
 	
 	$sps = $db->sql("SELECT * FROM speech WHERE id_from=".$sp["id"], __FILE__,__LINE__,__FUNCTION__,__CLASS__);
 	$table = '<center><br><br><table border=0 width=80% cellspacing=0 cellspadding=0>';
-	while($s = mysql_fetch_array($sps))
+	while($s = $db->fetchArray($sps))
 	{
 		if($s["showcounts"])
 		{

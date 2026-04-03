@@ -151,7 +151,7 @@ $counter=0;
 
 if ($player->pers["level"]>4) $koeff=0.9; else $koeff=1;
 
-while ($vesh=mysql_fetch_array($res))
+while ($vesh=$db->fetchArray($res))
 {
 	$sht = 1;
 	$item_lib = $vesh["id"];
@@ -271,7 +271,7 @@ echo "build_pers('".$sh["image"]."','".$sh["id"]."','".$oj["image"]."','".$oj["i
 <?php
 $as = $db->sql("SELECT * FROM p_auras WHERE uid=".$player->pers["uid"]."");
 $txt = '';
-while($a = mysql_fetch_array($as))
+while($a = $db->fetchArray($as))
 {
 	$txt .= $a["image"].'#<b>'.$a["name"].'</b>@';
 	$txt .= 'Осталось <i class=timef>'.tp($a["esttime"]-time()).'</i>';

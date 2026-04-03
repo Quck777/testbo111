@@ -40,7 +40,7 @@ $ws6=0;
 if ($player->pers["uid"]) $res = $db->sql("SELECT * FROM `wp` WHERE uidp=".intval($player->pers["uid"])." and weared=1");
 else $res = $db->sql("SELECT * FROM `wp` WHERE uidp=".intval(-1*$player->pers["bid"])." and weared=1");
 $j=0;
-while ($v=mysql_fetch_array($res))
+while ($v=$db->fetchArray($res))
 {
 
 		$ws1 += $v["s1"];

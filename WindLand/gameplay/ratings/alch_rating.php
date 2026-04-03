@@ -13,7 +13,7 @@ if (!file_exists(SERVICE_ROOT."/events/L".date("d-m-y").".txt"))
 
 	$top = "var list=new Array(\n";
 	$i=0;
-	while ($r=mysql_fetch_array($res)) 
+	while ($r=$db->fetchArray($res)) 
 	{
 
 	 $stats = floor($r["sp11"]);

@@ -12,7 +12,7 @@ if ($priv['ejour']==2)
 		$headers = "From: ".HOST." <".$email.">\r\n";   
 		$headers .= "Return-path: <".$email.">\r\n";
 		$headers .= "MIME-Version: 1.0\r\n";
-		$headers .= "Content-type: text/html; charset=windows-1251;\r\n";
+		$headers .= "Content-type: text/html; charset=UTF-8;\r\n";
 		
 		$body.= '<br /><br />С Уважением, Администрация <a href=http://'.HOST.'/>'.HOST.'</a> &copy;';
 		
@@ -77,7 +77,7 @@ if ($priv['ejour']==2)
 			$ml = '';
 			//  WHERE `uid`>0 ORDER BY `uid` LIMIT 0,1
 			$mails = $db->sql ('SELECT `email`, `user` FROM `users` WHERE `block`="" and `mail_good`=1  ORDER BY `uid`;');
-			while ( $m = mysql_fetch_row($mails) )
+			while ( $m = $db->fetchRow($mails) )
 			{
 				if ( filter_var($m[0], FILTER_VALIDATE_EMAIL)==true )
 				{
@@ -174,7 +174,7 @@ if ($http->get['jo']=='news') ### Новости
 	
 	
 	echo '<table width="90%" class="but">';
-	while ( $new = mysql_fetch_assoc($news) )
+	while ( $new = $db->fetchAssoc($news) )
 	{
 		echo "<tr>";
 		echo "<td class=login width=105>".substr($new['title'],0,20)."</td>";
@@ -218,7 +218,7 @@ elseif ($http->get['jo']=='supp')
 	
 	$res = $db->sql('SELECT * FROM `support` WHERE '.$drs.' ORDER BY `date` DESC;');
 	echo "<table border=1 width=90% cellspacing=3 cellpadding=2 bordercolorlight=#C0C0C0 bordercolordark=#FFFFFF align=center><tr><td class=brdr><a href='main.php?jo=supp&close=1'>Отобразить проверенные</a></td></tr>";
-	while ( $r = mysql_fetch_assoc($res) )
+	while ( $r = $db->fetchAssoc($res) )
 	{
 		$who = $db->sqla('SELECT `user` FROM `users` WHERE `uid`='.$r['uid']);
 		echo '<tr><td class=login><font class=ma  align=left>'.$r['title'].'</font> <div align=right>(<b>'.$who['user'].'</b>) '.date("d.m.Y H:i:s",$r['date']).'</div><a href=\'javascript:if(confirm("Удалить?")) location="main.php?jo=supp&del='.$r['date'].'";\'><img src=http://'.IMG.'/icons/del.png></a> <a href="main.php?jo=supp&ok='.$r['date'].'"><img src=http://'.IMG.'/icons/edit.png></a></td></tr><tr><td>'.str_replace("\n",'<br />',str_replace("\r",'',$r['text'])).'</td></tr>';

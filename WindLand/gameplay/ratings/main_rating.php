@@ -16,7 +16,7 @@ $res = $db->sql("SELECT *
 if (!isset($z)) $z = '';
 $top = "var list=new Array(\n";
 $i=0;
-while ($r=mysql_fetch_array($res)) 
+while ($r=$db->fetchArray($res)) 
 {
 
 // $stats = floor(($r["level"]*3000+ $r["exp"]/($r["victories"]+$r["losses"]+1)+($r["victories"]-$r["losses"])+ 100*$r["rank_i"]));

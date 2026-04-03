@@ -63,7 +63,7 @@ $today = getdate ();
 <HTML>
 <HEAD>
 <TITLE>Земли Ветров [<?=$player->pers['user'];?>] - Обязательно почистить кэш!</TITLE>
-<META Content='text/html; charset=windows-1251' Http-Equiv=Content-type>
+<META Content='text/html; charset=UTF-8' Http-Equiv=Content-type>
 
 <LINK href='css/main_v2.css' rel=STYLESHEET type=text/css>
 </HEAD>

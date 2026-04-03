@@ -34,7 +34,7 @@
 	$q = '';
 	$q2 = '';
 	$fl = sql("SELECT * FROM friendship WHERE uid1=".UID." or uid2=".UID);
-	while($f = mysql_fetch_array($fl))
+	while($f = $db->fetchArray($fl))
 	{
 		if ($f["type"]==0)
 		{
@@ -55,7 +55,7 @@
 	if ($q)
 	{
 	$frs = sql("SELECT user,online,location,state,level,aura,uid,rank_i,sign FROM `users` WHERE ".$q." ORDER BY `rank_i` DESC");
-	while ($perssost = mysql_fetch_array($frs)) 
+	while ($perssost = $db->fetchArray($frs)) 
 	{
 	echo"<tr><td class=user>";
 	echo"<img src='images/pr.gif' onclick=\"javascript:top.say_private('".$perssost["user"]."')\" style=cursor:pointer> &nbsp;&nbsp;";
@@ -96,7 +96,7 @@
 	if ($q2)
 	{
 	$frs = sql("SELECT user,online,location,state,level,aura,uid,rank_i,sign FROM `users` WHERE ".$q2." ORDER BY `rank_i` DESC");
-	while ($perssost = mysql_fetch_array($frs)) 
+	while ($perssost = $db->fetchArray($frs)) 
 	{
 	echo"<tr><td class=user>";
 	echo"<img src='images/pr.gif' onclick=\"javascript:top.say_private('".$perssost["user"]."')\" style=cursor:pointer> &nbsp;&nbsp;";

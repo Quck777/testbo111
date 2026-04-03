@@ -15,8 +15,8 @@ include (ROOT.'/inc/func3.php');	// Функции специфического использования, вызов 
 function remove_weapon_orden($v,$uid)
  {
 	//GLOBAL $pers;
-	$pers = mysql_fetch_array(mysql_query("SELECT * FROM `users` WHERE `uid`='".$uid."' LIMIT 1"));
-	if (!is_array($v)) $v = mysql_fetch_array(mysql_query ("SELECT * FROM `wp` WHERE `id` = '".$v."' and `weared`=1 and `uidp`='".$pers["uid"]."' LIMIT 1"));
+	$pers = $db->fetchArray(mysql_query("SELECT * FROM `users` WHERE `uid`='".$uid."' LIMIT 1"));
+	if (!is_array($v)) $v = $db->fetchArray(mysql_query ("SELECT * FROM `wp` WHERE `id` = '".$v."' and `weared`=1 and `uidp`='".$pers["uid"]."' LIMIT 1"));
 	if ($v){
 	$r = all_params();
 	foreach ($r as $a)
@@ -29,7 +29,7 @@ function remove_weapon_orden($v,$uid)
 	}
  }
 
-//$pers = mysql_fetch_assoc(mysql_query('SELECT * FROM `users` WHERE `uid` = '.$_COOKIE['uid'].' LIMIT 1;'));
+//$pers = $db->fetchAssoc(mysql_query('SELECT * FROM `users` WHERE `uid` = '.$_COOKIE['uid'].' LIMIT 1;'));
 
 
 
@@ -39,7 +39,7 @@ function remove_weapon_orden($v,$uid)
 if ($http->get["test"] == 1) {
 $items = mysql_query("SELECT * FROM `wp` WHERE `id_in_w`='' and `dprice`>0 and `uidp`=731");
 $kk = 0;
-while ($i = mysql_fetch_array($items)){    $kk++;
+while ($i = $db->fetchArray($items)){    $kk++;
     ## Вещь существует, вещь одета, персонаж не в бою. Персонаж оффлайн.
 	remove_weapon_orden ($i["id"],$i["uidp"]);
 }

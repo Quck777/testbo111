@@ -3,7 +3,7 @@
 	$db->sql("UPDATE users SET apps_id=0,fteam=0,refr=1 WHERE apps_id=".$app["id"]."");
 	$p1 = '';
 	$p2 = '';
-	while($a = mysql_fetch_array($p,MYSQL_ASSOC))
+	while($a = $db->fetchArray($p,MYSQL_ASSOC))
 	{
 		if ($a["fteam"]==1)  $p1.=$a["user"]."|";
 		else				 $p2.=$a["user"]."|";
