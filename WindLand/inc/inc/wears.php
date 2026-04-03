@@ -120,7 +120,7 @@ $j=0;
 $tt = time();
 $weared_count=0;
 $UD_ART = 1;
-while ($v=mysql_fetch_array($res))
+while ($v=$db->fetchArray($res))
 {
 	$z=1;
 

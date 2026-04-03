@@ -332,7 +332,7 @@ function remove_all_weapons()
 {
 	GLOBAL $player,$db;
 	$res = $db->sql("SELECT * FROM `wp` WHERE `weared` = 1 and `uidp` = ".$player->pers['uid']);
-	while($v = mysql_fetch_assoc($res))
+	while($v = $db->fetchAssoc($res))
 	{
 		$r = all_params();
 		foreach ($r as $a)
@@ -349,7 +349,7 @@ function remove_all_weapons_fight($user)
 	GLOBAL $db;
 	$res = $db->sql("SELECT * FROM `wp` WHERE `weared` = 1 and uidp=".$user."");
 	$personaj = $db->sqla("SELECT * FROM `users` WHERE uid=".$user."");
-	while($v = mysql_fetch_array($res))
+	while($v = $db->fetchArray($res))
 	{
 		$r = all_params();
 		foreach ($r as $a)
@@ -409,7 +409,7 @@ function Weared_Weapons($uid = 0)
 	$_W["topo"] = 0;
 	$_W["drob"] = 0;
 	$_W["shit"] = 0;
-	while($a = mysql_fetch_array($array,MYSQL_ASSOC))
+	while($a = $db->fetchArray($array,MYSQL_ASSOC))
 	{
 		@$_W[$a["stype"]] += 1;
 		@$_W[$a["stype"]]["udmin"] = $a["udmin"];

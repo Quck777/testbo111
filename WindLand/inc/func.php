@@ -141,7 +141,7 @@ function pers_pack($p)
 function msg_admin($m)
 {
 	$usr = $GLOBALS['db']->sql('SELECT `user` FROM `users` WHERE `priveleged`=1 and `online`=1 ORDER BY `uid`;');
-	while ( $us = mysql_fetch_row($usr) ) say_to_chat ('m',$m,1,$us[0],'*',0);
+	while ( $us = $db->fetchRow($usr) ) say_to_chat ('m',$m,1,$us[0],'*',0);
 }
 
 function j_pers($p)

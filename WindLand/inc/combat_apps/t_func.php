@@ -16,10 +16,10 @@ function start_t1($a=20,$STEP=1,$tour=1,$quest_id=1)
 		for($i=0;$i<$a;$i++)
 		{
 			$u1 = $u;
-			$u = mysql_fetch_array($users,MYSQL_ASSOC);
+			$u = $db->fetchArray($users,MYSQL_ASSOC);
 			if(!$u)
 			{
-				$u = mysql_fetch_array($bots,MYSQL_ASSOC);
+				$u = $db->fetchArray($bots,MYSQL_ASSOC);
 				if(!$u)
 					$u = $u1;
 				$us1[] = "bot=".$u["id"]."";

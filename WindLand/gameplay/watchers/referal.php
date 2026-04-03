@@ -14,7 +14,7 @@ if ($p25<>1) exit;
 	$frs = $db->sql('SELECT `uid` FROM `log_referals` WHERE `whoref`='.$player->pers['uid'].' ORDER BY `date`;');
 	echo '<table border="0" width="60%" cellspacing="0" cellpadding="0" class=LinedTable>';
 	$count = 0;
-	while ( $per = mysql_fetch_assoc($frs) ) 
+	while ( $per = $db->fetchAssoc($frs) ) 
 	{
 		$perssost = $db->sqla("SELECT `user`,`online`,`block`,`location`,`state`,`level`,`sign`,`ds`,`lastip` FROM `users` WHERE `uid`=".$per['uid']." ".$last);
 		if ($perssost==false) continue;

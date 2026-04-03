@@ -27,9 +27,9 @@ if ($player->pers["user"] == 'lastdays')
 		$p1 = false;
 		while (true)
 		{
-			if (!$p1) $p1 = mysql_fetch_array($ps);
+			if (!$p1) $p1 = $db->fetchArray($ps);
 			else $p1 = $p2;
-			$p2 = mysql_fetch_array($ps);
+			$p2 = $db->fetchArray($ps);
 			if ($p1) $textFill = 1;
 
 			if ($p1["invisible"]<=tme())

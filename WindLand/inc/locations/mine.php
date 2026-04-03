@@ -17,7 +17,7 @@ $tu = $db->sqla("SELECT * FROM mine WHERE x=".($player->pers["minex"])." and y="
 		$mperses = sql("SELECT user,level FROM users WHERE location='mine' and cfight=0 and apps_id=0 and online=1");
 		$bots_str = '';
 		$users_str = '';
-		while($mpers = mysql_fetch_array($mperses,MYSQL_ASSOC))
+		while($mpers = $db->fetchArray($mperses,MYSQL_ASSOC))
 		{
 			$a = $mpers["level"]+rand(-10,10);
 			if ($a>99) $a=99;
@@ -33,9 +33,9 @@ $tu = $db->sqla("SELECT * FROM mine WHERE x=".($player->pers["minex"])." and y="
 	if ( @$http->get["minego"] and $player->pers["waiter"]<=$t and $player->jKey(1) )
 	{
 		$res = $db->sql("SELECT * FROM resources ORDER BY RAND()", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
-		$r1 = mysql_fetch_array($res);
-		$r2 = mysql_fetch_array($res);
-		$r3 = mysql_fetch_array($res);
+		$r1 = $db->fetchArray($res);
+		$r2 = $db->fetchArray($res);
+		$r3 = $db->fetchArray($res);
 		$kr1 = floor(rand(10,2000)*sqrt($player->pers["minex"]+$player->pers["miney"])/$r1["price"]);
 		$kr2 = floor(rand(10,2000)*sqrt($player->pers["minex"]+$player->pers["miney"])/$r2["price"]);
 		$kr3 = floor(rand(10,2000)*sqrt($player->pers["minex"]+$player->pers["miney"])/$r3["price"]);
@@ -124,7 +124,7 @@ $y = $player->pers["miney"];
 	$cells_around = $db->sql("SELECT x,y,time_ready FROM mine WHERE x>=".($player->pers["minex"]-3)." and x<=".($player->pers["minex"]+3)." and y>=".($player->pers["miney"]-2)." and y<=".($player->pers["miney"]+2)." and mine=".$MINE_ID."", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
 
 $maked_str = Array();
-while ($cc = mysql_fetch_array($cells_around))
+while ($cc = $db->fetchArray($cells_around))
 if ($cc["time_ready"]<$t)
  $maked_str[$cc["x"]][$cc["y"]] = 'but';
 else
@@ -254,7 +254,7 @@ if (!$resources) $resources .= 'Вы не обнаружили здесь никаких ресурсов.';
 $resources .= '<br><i class=timef>Уже добыто</i>';
 $resources .= '<table border=0 width=100% class=LinedTable>';
 $_r = $db->sql("SELECT * FROM wp WHERE type='resources' and uidp='".$player->pers["uid"]."'", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
-while ($v = mysql_fetch_array($_r,MYSQL_ASSOC))
+while ($v = $db->fetchArray($_r,MYSQL_ASSOC))
 {
 	$resources .= "<tr>";
 	$resources .= "<td class=user>".$v["name"]."</td>";

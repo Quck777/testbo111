@@ -34,7 +34,7 @@ if ($act=="read") {
 		<table width=100% cellspacing=0 cellpadding=7 border=1 bordercolor=CCCCCC>
 		<tr><td><b>№</td><td><b>Отправитель</td><td width=100%><b>Тема</td></tr>
 	";
-	while ($pochta = mysql_fetch_array($poch) ) {
+	while ($pochta = $db->fetchArray($poch) ) {
 		$i++;
 		$user=$pochta["user"];
 		$text=$pochta["subject"];
@@ -48,7 +48,7 @@ if ($act=="read") {
 $mny=$pers["user"];
 if ($act=="let") {
 	$pochas = mysql_query("select * from pochta where id='$id' ORDER by ID DESC");
-	$let = mysql_fetch_array($pochas);
+	$let = $db->fetchArray($pochas);
 	$text=$let["text"];
 	$subj=$let["subject"];
 	$user=$let["user"];
@@ -67,7 +67,7 @@ if ($act=="write") {
 		<table width=100% cellspacing=0 cellpadding=7 border=1 bordercolor=CCCCCC>
 		<tr><td><b>№</td><td><b>Кому</td><td width=100%><b>Тема</td></tr>
 	";
-	while ($pochta = mysql_fetch_array($send) ) {
+	while ($pochta = $db->fetchArray($send) ) {
 		$i++;
 		$user=$pochta["whom"];
 		$text=$pochta["subject"];
@@ -117,7 +117,7 @@ if ($do=="3") {
 		$cr=$pers[money]-$kolvo;
 		mysql_query("UPDATE `users` SET `money` = '$cr' WHERE `uid`='".$_SESSION["uid"]."';");
 	            $infs = mysql_query("select * from users where user='$target'");
-	            $info = mysql_fetch_array($infs);
+	            $info = $db->fetchArray($infs);
 
 
 

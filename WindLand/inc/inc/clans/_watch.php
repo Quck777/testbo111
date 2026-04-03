@@ -33,7 +33,7 @@ function w_sostav()
 	GLOBAL $db;
 	$sstav = $db->sql("SELECT uid, user, online, location, state, level, clan_state, lastom, silence, clan_tr FROM `users` WHERE `sign`='watchers' ORDER BY `clan_state` DESC", __FILE__,__LINE__,__FUNCTION__,__CLASS__); //ASC
 	$GIF = 'watchers';
-	while ( $ws = mysql_fetch_assoc($sstav) )
+	while ( $ws = $db->fetchAssoc($sstav) )
 	{
 		if ($ws["uid"] == 7) $ws = j_pers($ws);
 		if ($ws['online']==1)

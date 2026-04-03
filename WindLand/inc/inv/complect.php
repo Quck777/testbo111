@@ -11,7 +11,7 @@ if ( $http->_post('name') )
 {	
 	$wears = $db->sql("SELECT id FROM wp WHERE weared=1 and uidp=".UID."");
 	$perswears = '';
-	while ($w = mysql_fetch_row($wears)) $perswears.= $w[0].'|';
+	while ($w = $db->fetchRow($wears)) $perswears.= $w[0].'|';
 	$chars["complects"].= addslashes($http->post["name"]).":".$perswears."@";
 	$db->sql('UPDATE `chars` SET `complects`= "'.$chars['complects'].'" WHERE `uid` = '.UID.';');
 }

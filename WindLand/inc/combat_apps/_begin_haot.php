@@ -3,7 +3,7 @@
 	$db->sql("UPDATE users SET apps_id=0,fteam=0,refr=1 WHERE apps_id=".$app["id"]."", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
 	$us1 = Array();
 	$r = Array();
-	while($a = mysql_fetch_array($p,MYSQL_ASSOC))
+	while($a = $db->fetchArray($p,MYSQL_ASSOC))
 	{
 		$us1[] = $a["user"];
 		$r[] = $a["rank_i"];

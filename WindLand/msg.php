@@ -171,7 +171,7 @@ if ( $cfgs and $a_m < tme() and date('i')%$cfgs[1]==0 )
 # —оставл€ем список игнора
 $ignore = '';
 $ign  = $db->sql("SELECT `nick` FROM `ignor` WHERE `uid`=".$pers['uid']);
-while ( $ig = mysql_fetch_row($ign) ) $ignore.= '<'.$ig[0].'>';
+while ( $ig = $db->fetchRow($ign) ) $ignore.= '<'.$ig[0].'>';
 
 ## ¬ывод подсказок игры
 if ( (50-$pers['level'])>rand(1,500) and false )
@@ -183,7 +183,7 @@ if ( (50-$pers['level'])>rand(1,500) and false )
 ##
  
 $s = '';
-while ( ($txt = mysql_fetch_assoc($res)) or $info==1 ) 
+while ( ($txt = $db->fetchAssoc($res)) or $info==1 ) 
 {
 	if ( substr_count($ignore, '<'.$txt['user'].'>') ) continue;
 	if ( $pers['chat_last_id']<$txt['id'] ) $pers['chat_last_id'] = $txt['id'];
@@ -235,7 +235,7 @@ while ( ($txt = mysql_fetch_assoc($res)) or $info==1 )
 if ($pers['curstate']==4)
 {
 	$res = $db->sql("SELECT `time`,`log` FROM `fight_log` WHERE `cfight`=".$pers['cfight']." and `turn`>".$pers['lasto']);
-	while( $txt = mysql_fetch_row($res) ) $s.= "'".$txt[0]."ХХХ".addslashes($txt[1])."Х0Х222222Х3Х',";
+	while( $txt = $db->fetchRow($res) ) $s.= "'".$txt[0]."ХХХ".addslashes($txt[1])."Х0Х222222Х3Х',";
 }
 
 ###########

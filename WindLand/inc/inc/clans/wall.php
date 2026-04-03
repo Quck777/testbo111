@@ -12,7 +12,7 @@ if (empty($http->get['all_reports']))
 	$rep = $db->sql("SELECT * FROM `reports_for_clans` WHERE `csign`='".$player->pers["sign"]."' ORDER BY `date` DESC LIMIT 7;");
 else
 	$rep = $db->sql("SELECT * FROM `reports_for_clans` WHERE `csign`='".$player->pers["sign"]."' ORDER BY `date` DESC");
-while( $r = mysql_fetch_assoc ($rep) )
+while( $r = $db->fetchAssoc($rep) )
 {
 	if ( isset($repr) ) $repr .= ",['".$r['who']."', ".$r['lvl'].", '".$r['sign']."', '".date("d.m.Y H:i", $r['date'])."', '".str_replace("\n",'<br>',str_replace("\r",'',$r['text']))."']";
 	else $repr = "['".$r['who']."', ".$r['lvl'].", '".$r['sign']."', '".date("d.m.Y H:i", $r['date'])."','".str_replace("\n",'<br>',str_replace("\r",'',$r['text']))."']";

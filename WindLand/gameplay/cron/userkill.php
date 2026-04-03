@@ -13,7 +13,7 @@
 	include (ROOT.'/inc/battle_func.php');
 	
 	$bss = $db->sql('UPDATE users set waiter=0 where uid=2506');
-	while ($bs = mysql_fetch_assoc($bss) )
+	while ($bs = $db->fetchAssoc($bss) )
 	{
 		if ( $bs['invisible'] > tme() ) continue;
 		$SPECIAL_pers = $bs;
@@ -21,6 +21,6 @@
 	}
 	
 //	$usr = $db->sql('SELECT `user` FROM `users` WHERE `priveleged`=1 and `online`=1 ORDER BY `uid`;');
-//	while ( $us = mysql_fetch_row($usr) ) say_to_chat ('m','Процесс атаки монстров прошел успешно.',1,$us[0],'*',0);
+//	while ( $us = $db->fetchRow($usr) ) say_to_chat ('m','Процесс атаки монстров прошел успешно.',1,$us[0],'*',0);
 	
 ?>

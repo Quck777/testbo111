@@ -63,7 +63,7 @@ $_CAN_TURN = 0; // - Можно ли сходить
 #################################################################
 $cans = $db->sql("SELECT uid2 FROM turns_f WHERE uid1=".$player->pers["uid"]."", __FILE__,__LINE__,__FUNCTION__,__CLASS__);####
 $uids = '';															####
-while($c = mysql_fetch_array($cans)) $uids.='<'.$c["uid2"].'>';		####
+while($c = $db->fetchArray($cans)) $uids.='<'.$c["uid2"].'>';		####
 #################################################################
 $CAN_TURN = 0;
 /*
@@ -74,7 +74,7 @@ $CAN_TURN = 0;
 ################# - Вывод команд  - ##################################################################################### 
 	echo "var team1 = '";
 	// Выводит всех людей в первой команде:
-	while ($tmp = mysql_fetch_array($p_t1))
+	while ($tmp = $db->fetchArray($p_t1))
 	{
 		$LIFE1++;
 		if ($tmp["invisible"]>tme() and $tmp["uid"]<>$player->pers["uid"])
@@ -92,7 +92,7 @@ $CAN_TURN = 0;
 		#####
 	}
 	///////////// Выводит всех ботов в первой  команде::
-	while ($tmp = mysql_fetch_array($b_t1))
+	while ($tmp = $db->fetchArray($b_t1))
 	{
 		$LIFE1++;
 		$BOTS1++;
@@ -106,7 +106,7 @@ $CAN_TURN = 0;
 ###########################################################################################################
 		echo "var team2 = '";
 	// Выводит всех людей в первой команде:
-	while ($tmp = mysql_fetch_array($p_t2))
+	while ($tmp = $db->fetchArray($p_t2))
 	{
 		$LIFE2++;
 		if ($tmp["invisible"]>tme() and $tmp["uid"]<>$player->pers["uid"])
@@ -124,7 +124,7 @@ $CAN_TURN = 0;
 		#####
 	}
 	///////////// Выводит всех ботов в первой  команде::
-	while ($tmp = mysql_fetch_array($b_t2))
+	while ($tmp = $db->fetchArray($b_t2))
 	{
 		$LIFE2++;
 		$BOTS2++;
@@ -179,7 +179,7 @@ elseif ($player->pers["chp"]>0 and !$_FINISHED and $CAN_TURN) # - Твой ХОД
 	if ($player->pers["fstate"]==3)
 	{
 		$bls = $db->sql("SELECT * FROM u_blasts WHERE uidp=".$player->pers["uid"]." and tlevel<=".$player->pers["level"]." and ts6<=".$player->pers["s6"]." and manacost<=".$player->pers["cma"]." and cur_colldown<=".time()." and cur_turn_colldown<=".$player->pers["f_turn"], __FILE__,__LINE__,__FUNCTION__,__CLASS__);
-		while($bl = mysql_fetch_array($bls))
+		while($bl = $db->fetchArray($bls))
 		{
 			if ($bl["turn_colldown"]) $colldown= 'Перезарядка: '.$bl["turn_colldown"].' ход.';
 			else $colldown= 'Перезарядка: '.$bl["colldown"].' сек.';
@@ -192,7 +192,7 @@ elseif ($player->pers["chp"]>0 and !$_FINISHED and $CAN_TURN) # - Твой ХОД
 
 		$as = $db->sql("SELECT * FROM u_auras WHERE uidp=".$player->pers["uid"]." and tlevel<=".$player->pers["level"]." and ts6<=".$player->pers["s6"]." and manacost<=".$player->pers["cma"]." and cur_colldown<=".time()." and cur_turn_colldown<=".$player->pers["f_turn"], __FILE__,__LINE__,__FUNCTION__,__CLASS__);
 		$txt = '';
-		while($a = mysql_fetch_array($as))
+		while($a = $db->fetchArray($as))
 		{
 			$txt .= $a["image"].'#'.$a["id"].'#<b class=user>'.$a["name"].'</b>@';
 			if ($a["turn_colldown"]) 
@@ -256,7 +256,7 @@ kidid['.$i.']="'.$kidid[$i].'";';
 		$bliz = 'Простой|Прицельный|Оглушающий';
 		$bliz_od = '3|5|7';
 		$spds = $db->sql("SELECT * FROM u_special_dmg WHERE uid=".$player->pers["uid"]." ORDER BY od ASC", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
-		while($spd = mysql_fetch_array($spds,MYSQL_ASSOC))
+		while($spd = $db->fetchArray($spds,MYSQL_ASSOC))
 		{
 			$bliz .= "|".$spd["name"];
 			$bliz_od .= "|".($spd["od"]+2);
@@ -337,7 +337,7 @@ elseif ($timeout==0 and @$http->get["battle"]=="finish" and $CAN_TURN==0 and $pl
 		if ($player->pers["fteam"]==1) $LIFE2 = 0; else $LIFE1 = 0;
 		$pt = $db->sql("SELECT * FROM users WHERE cfight=".$player->pers["cfight"]." and fteam<>".$player->pers["fteam"]." and chp>0", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
 		$db->sql("UPDATE users SET chp=0 WHERE cfight=".$player->pers["cfight"]." and fteam<>".$player->pers["fteam"]." and chp>0", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
-		while ($_persvs = mysql_fetch_array($pt)){include ('inc/inc/fights/travm.php');$s.=$str;}
+		while ($_persvs = $db->fetchArray($pt)){include ('inc/inc/fights/travm.php');$s.=$str;}
 		add_flog($s,$player->pers["cfight"]); 
 		$fight["all"]='<font class=timef>'.date("H:i")."</font>".$s.";".$fight["all"];
 		$db->sql("UPDATE `fights` SET `all`='".addslashes($fight["all"])."' , `ltime`='".time()."' WHERE `id`='".$fight["id"]."' ;", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
@@ -364,7 +364,7 @@ set_vars("can_turn=".intval($_CAN_TURN)."",$player->pers["uid"]);
 $log = $db->sql("SELECT time,log FROM fight_log WHERE cfight=".$player->pers["cfight"]." ORDER BY turn DESC LIMIT 0,3", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
 $_LOG = '';
 $i = 0;
-while ($l = mysql_fetch_array($log))
+while ($l = $db->fetchArray($log))
 {
 	if($i>0) $_LOG .= "<hr>";
 	$i++;

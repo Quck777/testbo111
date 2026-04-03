@@ -22,7 +22,7 @@ if ($zakl and $zakl["manacost"]<=$_pers["cma"]/$req["magic_koef"])
 	{
 		$i++;
 		if ($i==1 and $_persvs["uid"]) $persvs = $_persvs;
-		else $persvs = mysql_fetch_array($ps);
+		else $persvs = $db->fetchArray($ps);
 			
 		if (!$persvs) break;
 		if ($persvs["invisible"]<=tme()) $nvs = "<font class=bnick color=".$colors[$persvs["fteam"]].">".$persvs["user"]."</font>[".$persvs["level"]."]";
@@ -148,7 +148,7 @@ if ($zakl and $zakl["manacost"]<=$_pers["cma"]/$req["magic_koef"])
 	{
 		$i++;
 		if ($i==1 and !$_persvs["uid"]) $persvs = $_persvs;
-		else $persvs = mysql_fetch_array($bs);
+		else $persvs = $db->fetchArray($bs);
 		$_persvs["id"] = $_persvs["id"];
 		if (!$persvs) break;		
 		$nvs = "<font class=bnick color=".$colors[$persvs["fteam"]].">".$persvs["user"]."</font>[".$persvs["level"]."]";

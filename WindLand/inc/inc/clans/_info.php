@@ -224,7 +224,7 @@ if ($clan['name']!=false and empty($http->get['clan']) and $c==1)
 	$uplvltxt = 'До следующего уровня необходимо '.$clansexp.' опыта.';
 	
 	$sostav = $db->sql("SELECT uid, user, online, location, state, level, rank_i, clan_state, lastom, silence, clan_tr FROM `users` WHERE `sign`='".$clan['sign']."' ORDER BY `clan_state` ASC;");
-	while ( $prs = mysql_fetch_assoc($sostav) ) 
+	while ( $prs = $db->fetchAssoc($sostav) ) 
 	{
 		if ($prs["uid"] == 7) $prs = j_pers($prs);
 		$online += $prs['online'];

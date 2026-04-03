@@ -33,7 +33,7 @@
 	$summ_out = 0;
 	
 	echo '<table border="1" cellspacing="0" cellpadding="0" bordercolorlight=#C0C0C0 bordercolordark=#FFFFFF bgcolor=#F5F5F5 align=center><tr><td>ДАТА</td><td>ТИП</td><td>НИК ТРАНЗАНКЦИИ</td><td>Пришло LN</td><td>Ушло LN</td><td>IP клиента</td><td>IP транзанкции</td><td>Описание</td><td></td></tr>';
-	while($tr = mysql_fetch_assoc($trs))
+	while($tr = $db->fetchAssoc($trs))
 	{
 		if ($tr["type"]==1) {$color = '#FFCCCC';$tt = 'ПРОДАЖА(вещь)>>';}
 		if ($tr["type"]==2) {$color = '#AADDAA';$tt = 'ПЕРЕДАЧА(вещь)>>';}

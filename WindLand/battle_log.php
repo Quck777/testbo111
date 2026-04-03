@@ -16,7 +16,7 @@
 	if (!$results)
 	{
 		$res = $db->sql("SELECT * FROM fight_log WHERE cfight=".$bid." ORDER BY turn ASC LIMIT ".$limits.",".C_LIST."");
-		while( $txt = mysql_fetch_assoc($res) )
+		while( $txt = $db->fetchAssoc($res) )
 			$s.= "['".$txt["time"]."','".str_replace("'",'"',$txt["log"])."'],";
 	}
 	

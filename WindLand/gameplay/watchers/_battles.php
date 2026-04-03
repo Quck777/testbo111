@@ -7,7 +7,7 @@
 	if ($http->get["last"]=='all') $last = "";
 	$bs = $db->sql("SELECT * FROM `battle_logs` WHERE uid=".$player->pers["uid"]." ".$last." ORDER BY `time` DESC;");
 	echo '<table border="1" cellspacing="0" cellpadding="0" bordercolorlight=#C0C0C0 bordercolordark=#FFFFFF bgcolor=#F5F5F5 align=center>';
-	while($b = mysql_fetch_assoc($bs))
+	while($b = $db->fetchAssoc($bs))
 	{
 		echo "<tr>";
 		echo "<td bgcolor=#DDFFDD class=timef>".date("d.m.y H:i:s",$b["time"])."</td>";

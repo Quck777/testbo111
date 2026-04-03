@@ -123,7 +123,7 @@ while ($v=mysql_fetch_array ($enures))
 		elseif($v["tlevel"]<10) $r = rand(2,4);
 		else $r = rand(3,5);
 		$resources = $db->sql("SELECT * FROM resources ORDER BY RAND() LIMIT 0,".$r);
-		while($_r = mysql_fetch_array($resources))
+		while($_r = $db->fetchArray($resources))
 		{
 			$v["material_show"] .= $_r["name"].", ";
 			$v["material"] .= $_r["image"]."|";

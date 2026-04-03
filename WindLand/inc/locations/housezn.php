@@ -104,7 +104,7 @@ if ($type=="blast")
 	echo "<font class=title>ÌÀÃÈ×ÅÑÊÈÅ ÓÄÀĞÛ</font>";
 	echo "<table border=0 width=100% cellspacing=0 cellspadding=0 style='border-left-style: solid; border-width: 1px; border-color:silver'>";
 	$cnt = 0;
-	while ($bl = mysql_fetch_array($bls))
+	while ($bl = $db->fetchArray($bls))
 	{
 		$cnt++;
 		$tmp = $db->sqlr("SELECT id FROM u_blasts WHERE uidp=".$player->pers["uid"]." and id_in_w=".$bl["id"]."");
@@ -138,7 +138,7 @@ if ($type=="aura")
 	echo "<font class=title>ÀÓĞÛ</font>";
 	echo "<table border=0 width=100% cellspacing=0 cellspadding=0 style='border-left-style: solid; border-width: 1px; border-color:silver'>";
 	$cnt = 0;
-	while ($bl = mysql_fetch_array($bls))
+	while ($bl = $db->fetchArray($bls))
 	{
 		$tmp = $db->sqlr("SELECT id FROM u_auras WHERE uidp=".$player->pers["uid"]." and id_in_w=".$bl["id"]."");
 		if ($tmp) continue;

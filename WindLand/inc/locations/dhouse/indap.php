@@ -7,7 +7,7 @@ error_reporting(0);
 		echo '<div class=weapons_box><form action=main.php?c=indap method=post>ֲûבונטעו גושü: <select size="1" name="id" class="return_win"> ';
 		$r = $db->sql("SELECT name,id FROM wp WHERE uidp='".$player->pers["uid"]."' and where_buy=1 and id_in_w='' and clan_sign='' and weared=0");
 		$i=0;
-			while ($p = mysql_fetch_array($r))
+			while ($p = $db->fetchArray($r))
 			{
 				$i++;
 				echo "<option value=".$p["id"].">".$p["name"]."</option>";

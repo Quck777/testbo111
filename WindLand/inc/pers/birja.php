@@ -5,7 +5,7 @@ $couns = $db->sql('SELECT * FROM `birja` WHERE `id`>="'.$lo.'"  ORDER BY `dnv_ko
 echo'
 <table cellpadding=0 cellspacing=0 border=0 width=100%><tr><td bgcolor=#E0D6BB><table cellpadding=5 cellspacing=1 border=0 width=100%><tr><td colspan=4 align=center class=ftxt><b>Биржа покупки DNV за NV</b></td></tr><tr><td bgcolor=#FCFAF3 align=center class=ftxt><b>Сумма DNV</b></td><td bgcolor=#FCFAF3 align=center class=ftxt><b>Курс NV/DNV</b></td><td bgcolor=#FCFAF3 align=center class=ftxt><b>Итого NV</b></td><td bgcolor=#FCFAF3></td></tr>
 <tr><td colspan=4 bgcolor=#FFFFFF align=center class=forumne></td></tr>';
-while($birja = mysql_fetch_assoc($couns)) {
+while($birja = $db->fetchAssoc($couns)) {
 echo'<tr><td bgcolor=#FCFAF3 class=nickname align=center><b>'.$birja['dnv_kol'].'</b></td><td bgcolor=#FCFAF3 class=forumne align=center>'.$birja['kurs_nv'].'</td><td bgcolor=#FCFAF3 class=forumne align=center>'.$birja['dnv_kol']*$birja['kurs_nv'].'</td><td bgcolor=#FCFAF3 align=center>
 '.(($player->pers['uid']==$birja['uid_player'])?'<form action="main.php?gopers=birja" method=POST><input type=hidden name=post_id value=2><input type=hidden name=vcod value="'.$birja['id'].'"><input type=hidden name=vcode value="'.$lastom_new.'"><input type=submit value="Удалить" class=lbut></form>':'<form action="main.php?gopers=birja" method=POST><input type=hidden name=post_id value=3><input type=hidden name=vcod value="'.$birja['id'].'"><input type=hidden name=vcode value="'.$lastom_new.'"><input type=submit value="Оплатить" class=lbut></form>').'</td></tr>';
 }

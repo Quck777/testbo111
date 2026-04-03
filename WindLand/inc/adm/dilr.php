@@ -74,7 +74,7 @@ if ( !isset($http->get['dil']) or $http->get['dil']=='sosr' )
 {
 	$dlrs = $db->sql("SELECT `user`,`dmoney`,`money`,`level`,`uid`,`sign`,`state`,`dreserv` FROM `users` WHERE `diler`='1' ORDER BY `dreserv` DESC");
 	echo '<table class=but width=80%>';
-	while ( $dst = mysql_fetch_assoc($dlrs) ) 
+	while ( $dst = $db->fetchAssoc($dlrs) ) 
 	{
 		echo"<tr><td><font class=user>";
 		echo"<img src='http://".IMG."/_p.gif' onclick=\"javascript:top.say_private('".$dst['user']."')\" style=cursor:hand> 
@@ -126,7 +126,7 @@ elseif ($http->get['dil']=='log')
 	unset($logs);$vsego = 0;
 	$logg = $db->sql("SELECT * FROM `dtransfer` WHERE `uidwho`=".intval($http->get['user'])."");
 	echo '<form method=post action=main.php?dil=log&user='.intval($http->get['user']).'><table border="1" cellspacing="0" cellpadding="0" bordercolorlight=#C0C0C0 bordercolordark=#FFFFFF bgcolor=#F5F5F5 align=center>';
-	while( $logs = mysql_fetch_assoc($logg) )
+	while( $logs = $db->fetchAssoc($logg) )
 	{
 		$p = $db->sqla ("SELECT `user` FROM `users` WHERE `uid`='".$logs['uid']."'");
 		$vsego += $logs['summ'];

@@ -110,7 +110,7 @@ $pattle_id = Array(); $old_batt_echo = '';
 if ( $player->pers['etap_instant'] > 1 )
 {
 	$res = $db->sql('SELECT `cfight` FROM `battle_logs` WHERE `uid` = '.UID.' ORDER BY `time` DESC LIMIT 0, '.($player->pers['etap_instant']-1).';');
-	while ( $rs = mysql_fetch_row($res) ) $pattle_id[] = $rs[0];
+	while ( $rs = $db->fetchRow($res) ) $pattle_id[] = $rs[0];
 	// Получаем инфу об последнем бое
 	$last_battle = $db->sqlr('SELECT `result` FROM `fights` WHERE `id` = '.$pattle_id[0].';');
 	if ( !preg_match('/Победа за: <b>'.$player->pers['user'].'/', $last_battle) )

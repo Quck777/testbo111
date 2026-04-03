@@ -38,5 +38,5 @@ if ( $http->_cookie('filter1') or $f<>$http->_cookie('filter1') )
 
 header("Cache-Control: no-cache, must-revalidate");
 header("Pragma: no-cache");
-header("Content-type: text/html; charset=windows-1251");
+header("Content-type: text/html; charset=UTF-8");
 ?>

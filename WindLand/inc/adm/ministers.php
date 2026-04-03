@@ -52,7 +52,7 @@ unset($p);
 
 
 $m = $db->sql("SELECT `uid`,`user` FROM `users` WHERE `priveleged`=1");
-while($p = mysql_fetch_assoc($m))
+while($p = $db->fetchAssoc($m))
 {
 	$prv = $db->sqla("SELECT * FROM `priveleges` WHERE `uid`=".$p['uid']);
 	echo"<tr><td>";

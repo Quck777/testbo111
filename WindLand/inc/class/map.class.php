@@ -66,7 +66,7 @@ class Naturen
 	{
 		if ( $this->objectMap ) return;
 		$res = $this->db->sql("SELECT `name`, `x`, `y`, `go_id`, `type`, `wood`, `fishing`, `herbal`, `teleport` FROM `nature` WHERE `x` >= ".($this->pers['x']-WIDTH)." and `x` <= ".($this->pers['x']+WIDTH)." and `y` >= ".($this->pers['y']-HEIGHT)." and `y` <= ".($this->pers['y']+HEIGHT)." ;");
-		while ( $c = mysql_fetch_assoc($res) )
+		while ( $c = $db->fetchAssoc($res) )
 		{
 			$this->allNature[$c['x'].'_'.$c['y']] = $c;
 		}
@@ -134,7 +134,7 @@ class Naturen
 		{
 			$TPs = $this->db->sql('SELECT `name`,`x`,`y`,`teleport` FROM `nature` WHERE `teleport`>0 and not (`x` = "'.$this->pers['x'].'" and `y` = "'.$this->pers['y'].'");');
 			$SEL = '';
-			while($TP = mysql_fetch_assoc($TPs))
+			while($TP = $db->fetchAssoc($TPs))
 			{
 				$SEL .= ((!empty($SEL)) ? ',' : '').'["'.$TP['x'].'","'.$TP['y'].'","'.$TP['name'].'","'.$TP['teleport'].'"]';
 			}

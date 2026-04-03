@@ -48,7 +48,7 @@
 	{
 		$as = $db->sql("SELECT id,name,esttime FROM auras");
 		$r = '';
-		while($a = mysql_fetch_array($as,MYSQL_ASSOC))
+		while($a = $db->fetchArray($as,MYSQL_ASSOC))
 		{
 			$a["name"].= '['.tp($a["esttime"]).']';
 			$r .= ',['.$a["id"].',\''.$a["name"].'\']';

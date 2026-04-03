@@ -1,5 +1,5 @@
 <?
-$bot=mysql_fetch_array (sql("SELECT * FROM `bots` WHERE `id`='".$p[1]."'"));
+$bot=$db->fetchArray(sql("SELECT * FROM `bots` WHERE `id`='".$p[1]."'"));
 $bot["chp"] = $p[2];
 $bot["cma"] = $p[3];
 $xy = explode("_",$p[4]);

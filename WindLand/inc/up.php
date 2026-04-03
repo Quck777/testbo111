@@ -157,7 +157,7 @@ else $_OVERWEIGHT = 0;
 
 @header("Cache-Control: no-cache, must-revalidate");
 @header("Pragma: no-cache");
-@header("Content-type: text/html; charset=windows-1251");
+@header("Content-type: text/html; charset=UTF-8");
 
 ?>
 <html>

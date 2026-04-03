@@ -89,7 +89,7 @@ if ($type=="blast")
 	$bls = $db->sql("SELECT * FROM u_blasts WHERE uidp=".$player->pers["uid"]);
 	echo "<font class=title>люцхвеяйхе сдюпш(".$blsЯ.")</font>";
 	echo "<table border=0 width=100% cellspacing=0 cellspadding=0 class=inv style='border-left-style: solid; border-width: 1px; border-color:silver'>";
-	while ($bl = mysql_fetch_array($bls))
+	while ($bl = $db->fetchArray($bls))
 	{
 		vblast($bl,$player->pers);
 	}
@@ -102,7 +102,7 @@ if ($type=="aura")
 	$bls = $db->sql("SELECT * FROM u_auras WHERE uidp=".$player->pers["uid"].$q);
 	echo "<font class=title>люцхвеяйхе юспш(".$blsЯ.")</font>";
 	echo "<table border=0 width=100% cellspacing=0 cellspadding=0 style='border-left-style: solid; border-width: 1px; border-color:silver' class=loc>";
-	while ($bl = mysql_fetch_array($bls))
+	while ($bl = $db->fetchArray($bls))
 	{
 		vaura($bl,$player->pers);
 	}

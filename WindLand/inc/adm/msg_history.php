@@ -8,7 +8,7 @@ function clans_select_list()
 	GLOBAL $db;
 	$rs = $db->sql('SELECT `sign`, `name` FROM `clans`');
 	$r = '';
-	while ($s = mysql_fetch_row($rs))
+	while ($s = $db->fetchRow($rs))
 		$r.= '<option value="'.$s[0].'">'.$s[1].'</option>';
 	return $r;
 }
@@ -51,7 +51,7 @@ if ( isset($_POST['claner']) )
 
 $s = '';
 $i = 0;
-while ( $txt = mysql_fetch_assoc($res)  )
+while ( $txt = $db->fetchAssoc($res)  )
 {
 	if ( !empty($txt['clan']) ) $txt['private']=2;
 	

@@ -13,7 +13,7 @@ if ( $http->_post('new_nps') and $priv['equests']==2 )
 if ( $http->_get('del_nps') and $priv['equests']==2 )
 {
 	$rs = $db->sql('SELECT `id` FROM `jQuest_list` WHERE `nps_id` = '.$http->_get('del_nps').';');
-	while ( $r = mysql_fetch_row($rs) ) $db->sql("DELETE FROM `jQuest_users` WHERE `qid` = ".$r[0].";");
+	while ( $r = $db->fetchRow($rs) ) $db->sql("DELETE FROM `jQuest_users` WHERE `qid` = ".$r[0].";");
 	
 	$db->sql("DELETE FROM `jQuest_nps` WHERE `qid` = ".$http->_get('del_nps')." LIMIT 1");
 	$db->sql("DELETE FROM `jQuest_list` WHERE `nps_id` = ".$http->_get('del_nps').";");
@@ -150,7 +150,7 @@ if ( $noatcion )
 	echo '<table width="90%" class="but" style="text-align: center; border-collapse:collapse;">';
 	echo '<tr><td width="140" style="border: 1px solid #222222;">NPS</td><td style="border: 1px solid #222222;"><table width="100%" style="text-align:center;"><tr><td>ID</td><td>Название</td><td>От-до</td><td>Режим выполнения</td><td>Ограничение времени</td><td>Предквест</td><td>#</td></tr></table></td></tr>';
 	$arr_nps = $db->sql('SELECT * FROM `jQuest_nps` ORDER BY `qid` ASC;');
-	while ( $nps = mysql_fetch_assoc($arr_nps) )
+	while ( $nps = $db->fetchAssoc($arr_nps) )
 	{
 		echo '<tr valign="top" style="border: 1px solid #222222;"><td width="140" style="border: 1px solid #222222; padding: 5px;">
 			<b>'.$nps['name'].'</b><br />
@@ -161,7 +161,7 @@ if ( $noatcion )
 			<a href="javascript:if(confirm(\'Вы уверены что хотите удалить NPS? Так же удалятся и все квесты NPSa.\'))location=\'main.php?del_nps='.$nps['qid'].'\';" class="bga">Удалить NPS</a>
 			</td><td style="border: 1px solid #222222; padding: 5px;"><table width="100%" style="text-align:center;">';
 			$qs = $db->sql('SELECT * FROM `jQuest_list` WHERE `nps_id` = '.$nps['qid'].' ORDER BY `id` ASC;');
-			while ( $q = mysql_fetch_assoc($qs) )
+			while ( $q = $db->fetchAssoc($qs) )
 			{
 				echo '<tr >';
 				echo '<td><b>'.$q['id'].'</b></td>';

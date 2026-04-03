@@ -222,14 +222,14 @@
 	$JS = '';	
 	$SKIN_SEL = '<option value="0">Нет</option>';
 	$SKINS = $db->sql("SELECT * FROM skins");
-	while($SKIN = mysql_fetch_array($SKINS))
+	while($SKIN = $db->fetchArray($SKINS))
 	{
 		$SKIN_SEL .= '<option value="'.$SKIN["id"].'">'.$SKIN["name"].'['.$SKIN["price"].']</option>';
 	}
 		
 	echo "<center class=but><a class=bg href=main.php?add=1>Добавить новую линейку ботов</a></center>";
 	echo "<center class=fightlong><table class=LinedTable border=0 width=100%>";
-	while ($bn = mysql_fetch_array($allbots_names,MYSQL_ASSOC))
+	while ($bn = $db->fetchArray($allbots_names,MYSQL_ASSOC))
 	{
 		$lvls = $db->sqla("SELECT MAX(level) as maxlvl, MIN(level) as minlvl,MAX(rank_i) as maxrank, MIN(rank_i) as minrank FROM bots WHERE user='".$bn["user"]."'");
 		echo "<tr>";

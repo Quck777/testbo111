@@ -15,7 +15,7 @@ if( empty($http->get['editor']) )
 	$cl = $db->sql("SELECT * FROM `clans` WHERE `sign`<>'watchers'");
 	echo "<table class=but width='90%'>";
 	$i = 1;
-	while($c = mysql_fetch_assoc($cl))
+	while($c = $db->fetchAssoc($cl))
 	{
 		echo "<tr>";
 		echo "<td>".($i++)."</td>";
@@ -83,7 +83,7 @@ elseif ( isset($http->get['editor']) and !empty($http->get['editor']) )
 		echo "<center><i class=user>Состав</i><table class=but width=800>";
 		$sostav = $db->sql("SELECT user,rank,online,location,state,level,aura,uid,rank_i,clan_state,lastom,clan_tr FROM `users` WHERE `sign`='".$clan['sign']."' ORDER BY `clan_state` ASC");
 
-		while ($perssost = mysql_fetch_assoc($sostav)) 
+		while ($perssost = $db->fetchAssoc($sostav)) 
 		{
 				
 			//if ($status=='g' or $status=='z') 
@@ -160,7 +160,7 @@ elseif ( isset($http->get['editor']) and !empty($http->get['editor']) )
 		else
 			$enures = $db->sql("SELECT * FROM `wp` WHERE `clan_sign`='".$clan['sign']."'");
 		$check = 0;
-		while ( $v=mysql_fetch_assoc($enures) ) 
+		while ( $v=$db->fetchAssoc($enures) ) 
 		{
 			if( $v['max_durability']==true and $v['durability']==false ) continue;
 			echo "<div class=but2>";

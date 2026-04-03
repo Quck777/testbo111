@@ -31,7 +31,7 @@ function qjob_result($qu)
 
 $quest_user = $db->sql('SELECT * FROM `jQuest_users` WHERE `uid` = '.$player->pers['uid'].' ORDER BY `start_time` DESC;', __FILE__,__LINE__,__FUNCTION__,__CLASS__);
 echo '<table width="90%" border="1" cellspacing="0" cellpadding="0" class="but" style="text-align: center;">';
-while ( $qu = mysql_fetch_assoc($quest_user) )
+while ( $qu = $db->fetchAssoc($quest_user) )
 {
 	switch ($qu['finish'])
 	{

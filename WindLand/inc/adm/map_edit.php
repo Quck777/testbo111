@@ -71,7 +71,7 @@ if ($priv['emap']==2 and $priv['level']>0)
 $cells_around = $db->sql("SELECT x,y,type,wood,fishing,herbal,agriculture,go_id,bot,blvlmin,blvlmax FROM nature WHERE x>=".($x-5)." and x<=".($x+5)." and y>=".($y-4)." and y<=".($y+4)."");
 
 $maked_str = '';
-while ($cc = mysql_fetch_assoc($cells_around))
+while ($cc = $db->fetchAssoc($cells_around))
 {
 	$bimg = $db->sqlr("SELECT obr FROM bots WHERE id=".intval($cc["bot"]));
 	$maked_str .= '<'.$cc["x"].'_'.$cc["y"].'@'.$cc["type"].','.$cc["wood"].','.$cc["herbal"].','.$cc["fishing"].','.$cc["agriculture"].','.$cc["go_id"].','.$bimg.','.$cc["blvlmin"].','.$cc["blvlmax"].'@>';
@@ -81,7 +81,7 @@ $cell = $db->sqla("SELECT * FROM nature WHERE x=".($x)." and y=".($y)."");
 $max_bot_lvl = $cell["blvlmax"];
 $bts = $db->sql("SELECT * FROM nature_bots WHERE x=".($x)." and y=".($y)."");
 $bots = "<table border=0 class=but>";
-while($b = mysql_fetch_assoc($bts))
+while($b = $db->fetchAssoc($bts))
 {
 	$b1 = $db->sqla("SELECT user,level,id FROM bots WHERE id=".$b["idmin"]);
 	$b2 = $db->sqla("SELECT user,level,id FROM bots WHERE id=".$b["idmax"]);
@@ -172,7 +172,7 @@ else
 echo "<script>\n";
 echo "var bn=[";
 $allbots_names = $db->sql("SELECT user,id,obr,pol,MIN(level) as minlvl,MAX(level) as maxlvl FROM bots GROUP BY user;");
-while ($bn = mysql_fetch_array($allbots_names,MYSQL_ASSOC))
+while ($bn = $db->fetchArray($allbots_names,MYSQL_ASSOC))
 {
 	echo "['".$bn["user"]."',".$bn["id"].",'".$bn["pol"]."_".$bn["obr"]."',".$bn["minlvl"].",".$bn["maxlvl"]."],";
 }

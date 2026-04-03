@@ -4,7 +4,7 @@
 	$s = '';
 	$UNIXtime = tme();
 	$counter = 0;
-	while($app = mysql_fetch_array($allapps,MYSQL_ASSOC))
+	while($app = $db->fetchArray($allapps,MYSQL_ASSOC))
 	{
 		if (!$app["id"]) continue;
 		if (intval($_FILTER["apps"])==0)
@@ -28,7 +28,7 @@
 		and $app["type"]==3) include ("_begin_haot.php");
 		else
 		{
-			while($a = mysql_fetch_array($p))
+			while($a = $db->fetchArray($p))
 			{
 				$write_this = true;
 				if ($a["invisible"]>tme() and $a["user"]<>$player->pers["user"])
@@ -101,7 +101,7 @@
             if (($player->pers["lb_attack"]+$lb)<=tme())
             {
                 $bts = $db->sql("SELECT id,user,level FROM bots WHERE level>".($player->pers["level"]-2)." and level<".($player->pers["level"]+2)." and rank_i<".($player->pers["rank_i"]+140)." and special=0 ORDER BY RAND() LIMIT 0,3", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
-                while($bt = mysql_fetch_array($bts))
+                while($bt = $db->fetchArray($bts))
                 {
                     $s .= '\'50:1:60:';
                     $s .= '1:1:1:';
@@ -121,7 +121,7 @@
             if (($player->pers["lb_attack"]+$lb)<=tme())
             {
                 $bts = $db->sql("SELECT id,user,level FROM bots WHERE level>=0 and level<".($player->pers["level"]+2)." and rank_i<".($player->pers["rank_i"]+140)." and special=0 ORDER BY RAND() LIMIT 0,3", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
-                while($bt = mysql_fetch_array($bts))
+                while($bt = $db->fetchArray($bts))
                 {
                     $s .= '\'50:1:60:';
                     $s .= '1:1:1:';
@@ -140,7 +140,7 @@
             $bts = sql('SELECT uid,user,level,ctip FROM users WHERE ctip=-1 and level='.($player->pers["level"]).' and silence=0 LIMIT 0,'.rand(2,3).'');
             if(!$bts)
                 $bts = sql("SELECT uid,user,level,ctip FROM users WHERE level=".($player->pers["level"])." and block<>'' and rank_i>5 and s6=1 and s5=1 and silence = 0 LIMIT 0,".rand(2,3)."");
-            while($bt = mysql_fetch_array($bts))
+            while($bt = $db->fetchArray($bts))
             {
                 $s .= '\'50:1:20:';
                 $s .= '1:1:1:';

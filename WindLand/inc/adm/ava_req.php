@@ -31,7 +31,7 @@ if ($priv['level']!=0 and $priv['level']<=3)
 	echo "<center>";
 	echo "<table class=but width=80%><tr>";
 	$i = 0;
-	while($r = mysql_fetch_assoc($req))
+	while($r = $db->fetchAssoc($req))
 	{
 		$i++;
 		$p = $db->sqla("SELECT user,level FROM users WHERE uid=".$r["uid"]);

@@ -309,7 +309,7 @@ function bank_change($acc_act){
         $sql = 'SELECT * FROM bank_trans WHERE `uid`='.UID.' AND `trans_id`='.$sort.' LIMIT '.$start.','.$stop;
   	  }
     $zapros = $db->sql($sql);
-      for (;$trans = mysql_fetch_array($zapros);){
+      for (;$trans = $db->fetchArray($zapros);){
         if ($trans[2] == 2){
   	      $tto = $db->sqla('SELECT `user` FROM users WHERE `uid`='.$trans[3]);
           $trans[3] = $tto[0];
@@ -402,7 +402,7 @@ echo "<center><table border=2 width=60% cellspacing=2 cellpadding=2 bordercolorl
 $counter=0;
 
 
-while ($vesh=mysql_fetch_array($res))
+while ($vesh=$db->fetchArray($res))
 {
 	$counter++;
 	echo "<tr><td align=left class=weapons_box>";

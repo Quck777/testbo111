@@ -62,7 +62,7 @@ $vsego = $db->sqlr('SELECT COUNT(uid) FROM `users` WHERE `online`= 1;');
 /* $r = ''; 
 if ($place<>'out') $rsds = $db->sql('SELECT * FROM `residents` WHERE `location`="'.$place.'";');
 else $rsds = $db->sql('SELECT * FROM `residents` WHERE `x` = '.$player->pers['x'].' and `y`='.$player->pers['y'].' and `location`="out" ;');
-while($rs = mysql_fetch_assoc($rsds))
+while($rs = $db->fetchAssoc($rsds))
 {
 	$b = $db->sqlr("SELECT `level` FROM `bots` WHERE `id`=".$rs['id_bot']);
 	$r.= "'".$rs['name']."|".$b."|".$rs['id']."|".$rs['id_bot']."'";
@@ -74,14 +74,14 @@ while($rs = mysql_fetch_assoc($rsds))
 // Получаем список игрора
 $ignore = '';
 $ign = $db->sql('SELECT `nick` FROM `ignor` WHERE `uid`='.$player->pers['uid']);
-while ($ig = mysql_fetch_assoc($ign)) $ignore.= $ig['nick'].'|';
+while ($ig = $db->fetchAssoc($ign)) $ignore.= $ig['nick'].'|';
 
 
 // Начинаем вывод контента
 header("Cache-Control: no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-header("Content-type: text/html; charset=windows-1251");
+header("Content-type: text/html; charset=UTF-8");
 ?>
 <SCRIPT type="text/javascript" language="javascript" src="/js/ch_list_v2.js?2"></SCRIPT>
 <SCRIPT type="text/javascript" language="javascript" src="/js/mod/jquery.js"></SCRIPT>
@@ -103,7 +103,7 @@ if ( $http->_get('view') == 'this')
 } else $res = $db->sql('SELECT sign,align,user,level,state,diler,clan_name,uid,priveleged,silence,invisible,clan_state FROM `users` WHERE `online`=1;');
 
 
-while ( $row = mysql_fetch_assoc($res) ) 
+while ( $row = $db->fetchAssoc($res) ) 
 {
 	## Убераем себя с онлайна, запарили
 	if ( $row['uid'] == 7) continue;
@@ -112,7 +112,7 @@ while ( $row = mysql_fetch_assoc($res) )
 	$i++;
 	$tr='';
 	$trs = $db->sql("SELECT `special`,esttime FROM `p_auras` WHERE `uid`=".$row['uid']." and (`special`=3 or `special`=4 or `special`=5 or `special`=50) and `esttime`>".time()); 
-	while($ttt = mysql_fetch_assoc($trs))
+	while($ttt = $db->fetchAssoc($trs))
 	{
 		if ($ttt['special']==3) $tr .= 'Легкая травма, еще '.tp($ttt['esttime']-time()).'<br />';
 		if ($ttt['special']==4) $tr .= 'Средняя травма, еще '.tp($ttt['esttime']-time()).'<br />';

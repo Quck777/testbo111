@@ -4,7 +4,7 @@ if ($p21<>1) exit;
 	$wwer = $db->sql("SELECT * FROM `watch_verification` WHERE `uid`=".$player->pers['uid']."  ORDER BY `date` DESC");
 	echo '<table border="1" cellspacing="0" cellpadding="0" bordercolorlight=#C0C0C0 bordercolordark=#FFFFFF bgcolor=#F5F5F5 align=center>';
 	$i = 0;
-	while( $ww = mysql_fetch_assoc($wwer) )
+	while( $ww = $db->fetchAssoc($wwer) )
 	{
 		$i++;
 		if ($ww['type']==1)

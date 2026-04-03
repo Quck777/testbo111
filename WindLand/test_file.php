@@ -12,12 +12,12 @@ include ('inc/connect.php');
 <HTML>
 <HEAD>
 <LINK href="../../css/game.css" rel=STYLESHEET type=text/css>
-<META Http-Equiv=Content-Type Content="text/html; charset=windows-1251">
+<META Http-Equiv=Content-Type Content="text/html; charset=UTF-8">
 <META Http-Equiv=Cache-Control Content=No-Cache>
 <META Http-Equiv=Pragma Content=No-Cache>
 <META Http-Equiv=Expires Content=0>
 </HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Сравнение файлов</title>
 </head>
 <body class="nickname">
@@ -69,7 +69,7 @@ if(isset($_POST['findNew']))findNew($_POST['dir'],!isset($_POST['add'])?false:tr
 
 	function findMody($t=false,$mod = false){
 	$sql = mysql_query('SELECT * FROM files');
-	while($file = mysql_fetch_assoc($sql)){
+	while($file = $db->fetchAssoc($sql)){
 		if(!file_exists($file['folder'].'/'.$file['file'])){
 		if($mod){
 			mysql_query("DELETE FROM files WHERE id = '".$file['id']."' LIMIT 1;");
@@ -116,7 +116,7 @@ if(isset($_POST['findNew']))findNew($_POST['dir'],!isset($_POST['add'])?false:tr
 		$files = @scandir($dir, 1);
 		if(empty($files))return;
 		$sql = mysql_query("SELECT file FROM files WHERE folder='$dir';");
-		while($row = mysql_fetch_assoc($sql)){
+		while($row = $db->fetchAssoc($sql)){
 			$find = array_search($row['file'],$files);
 			if($find!==false) unset($files[$find]);
 			}

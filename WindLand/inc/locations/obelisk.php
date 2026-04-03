@@ -36,7 +36,7 @@ $res = mysql_query("SELECT user,level,kb,udmax,id FROM `bots` ORDER BY (level*10
 
 echo "var list=new Array(\n";
 $i=0;
-while ($row=mysql_fetch_array($res)) 
+while ($row=$db->fetchArray($res)) 
 {
 if (empty($_GET["cat"]) or $_GET["cat"]==1)
  {
@@ -163,7 +163,7 @@ if ($_GET["cat"]==4)
 echo '<div align=center> <table width="600" id="table1" border=0 cellspacing=0 cellpadding=2>';
 $res = mysql_query("SELECT user,level,referal_counter,sign FROM `users` WHERE `sign`<>'sl' ORDER BY (referal_counter) DESC LIMIT 0 , 50");
 $p=1;
-while($row=mysql_fetch_array($res))
+while($row=$db->fetchArray($res))
 {
 $user=$row[user];
 $level=$row[level];
@@ -182,7 +182,7 @@ echo '<div align=center> <table width="600" id="table1" border=0 cellspacing=0 c
 //error_reporting(E_ALL);
 $res = mysql_query("SELECT * FROM `clans` ORDER BY `clans`.`dmoney` DESC LIMIT 0 , 30");
 $p=1;
-while($row=mysql_fetch_array($res))
+while($row=$db->fetchArray($res))
 {
 $dmoney=(1234+$row[dmoney]*3)-1234;
 $name=$row[name]; 

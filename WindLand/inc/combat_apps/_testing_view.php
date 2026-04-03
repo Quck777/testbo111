@@ -10,7 +10,7 @@
 	$allbots_names = $db->sql("SELECT user,id,obr,pol FROM bots GROUP BY user;");
 	$txt = '';
 	$txt .= "<center class=fightlong><table class=LinedTable border=0 width=100%>";
-	while ($bn = mysql_fetch_array($allbots_names,MYSQL_ASSOC))
+	while ($bn = $db->fetchArray($allbots_names,MYSQL_ASSOC))
 	{
 		$lvls = $db->sqla("SELECT MAX(level) as maxlvl, MIN(level) as minlvl,MAX(rank_i) as maxrank, MIN(rank_i) as minrank FROM bots WHERE user='".$bn["user"]."'");
 		$txt .= "<tr>";

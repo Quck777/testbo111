@@ -55,7 +55,7 @@ if ( UID == 7 or 1 )
 
 	echo "<center class=lUser>У вас с собой <b>".round($player->pers['wmoney'],2)." WN</b></center><table border=2 width=98% cellspacing=2 cellpadding=2 bordercolorlight=#C0C0C0 bordercolordark=#FFFFFF><form action=main.php onsubmit='return false;' name=lavka1>";
 	$enures = $db->sql("SELECT * FROM `weapons` WHERE `sign`='watchers' ORDER BY `price` DESC;");
-	while ( $v = mysql_fetch_assoc($enures) )
+	while ( $v = $db->fetchAssoc($enures) )
 	{
 		echo '<tr><td align="left" class="weapons_box">';
 		if ( $v['q_s']<1 )

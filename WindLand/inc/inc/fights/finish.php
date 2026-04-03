@@ -148,7 +148,7 @@ if ($fight["type"]=='notf' or $fight["type"]=='')
 
 		$m='';
 		$win = ($LIFE1!=0)?1:0;
-		while ($tmp = mysql_fetch_array($p_t1) or ($tmp = mysql_fetch_array($b_t1)))
+		while ($tmp = $db->fetchArray($p_t1) or ($tmp = $db->fetchArray($b_t1)))
 		{
 
 			if($tmp["level"]>2)
@@ -191,7 +191,7 @@ if ($fight["type"]=='notf' or $fight["type"]=='')
 
 		$m='';
 		$win = ($LIFE2!=0)?1:0;
-		while ($tmp = mysql_fetch_array($p_t2) or $tmp = mysql_fetch_array($b_t2))
+		while ($tmp = $db->fetchArray($p_t2) or $tmp = $db->fetchArray($b_t2))
 		{
 			if($tmp["level"]>2)
 			{
