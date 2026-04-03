@@ -1,69 +1,75 @@
 ```
-# System files
-Thumbs.db
+# Dependencies
+vendor/
 
-# Environment variables
+# Logs and temp files
+*.log
+*.tmp
+
+# Environment
 .env
 .env.local
 *.env.*
 
-# Logs
-*.log
-
-# Temporary files
-*.tmp
+# Editor/IDE
+.vscode/
+.idea/
 *.swp
 *.swo
 
-# Dependencies
-node_modules/
-vendor/
+# OS
+.DS_Store
+Thumbs.db
 
 # Build artifacts
 dist/
 build/
 target/
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.out
+*.class
 
-# Python specific
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
-env/
-venv/
-.venv/
-.ENV
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.log
-.git/
-.mypy_cache/
-.pytest_cache/
-.hypothesis/
+*.egg-info/
+.eggs/
 
-# PHP specific
-*.phar
-.php_cs
-.php_cs.dist
+# Node.js
+node_modules/
 
-# Compression archives
+# Java
+*.class
+*.jar
+*.war
+*.ear
+.META-INF/
+
+# C/C++
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Compressed files
 *.zip
-*.tar.gz
-*.tar.bz2
-*.tar.xz
 *.gz
-*.rar
-*.7z
+*.tar
+*.tgz
 *.bz2
 *.xz
+*.7z
+*.rar
 *.zst
 *.lz4
 *.lzh
@@ -74,14 +80,52 @@ coverage.xml
 *.Z
 *.lz
 *.lzo
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.zst
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Testing
+.mypy_cache/
+.pytest_cache/
+.nyc_output/
+coverage/
+
+# Documentation
+docs/_build/
+*.rst~
+
+# Database
+*.db
+*.db-journal
+
+# Backup files
+*~
+*.bak
+*.backup
 
 # IDE specific
-.vscode/
-.idea/
+.settings/
+.project
+.classpath
+.gradle/
+*.iml
+*.ipr
+*.iws
+
+# Temporary files
+*.tmp
+*.temp
+*.log
 *.swp
 *.swo
 
-# OS generated files
+# System files
 .DS_Store
 .DS_Store?
 ._*
