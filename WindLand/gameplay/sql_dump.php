@@ -36,7 +36,7 @@ $SK = new dumper();
 define('C_DEFAULT', 1);
 define('C_RESULT', 2);
 define('C_ERROR', 3);
-mysql_query("/*!40101 SET NAMES '" . CHARSET . "' */") or die("Invalid query: " . mysql_error());
+$db->sql("/*!40101 SET NAMES '" . CHARSET . "' */") or die("Invalid query: " . $db->mysqli->error);
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 $action = 'backup';
 switch($action){
@@ -107,9 +107,9 @@ class dumper {
 		    exit;
 		}
 		tpl_l("Подключение к БД `{$db}`.");
-		mysql_select_db($db) or trigger_error ("Не удается выбрать базу данных.<BR>" . mysql_error(), E_USER_ERROR);
+		mysql_select_db($db) or trigger_error ("Не удается выбрать базу данных.<BR>" . $db->mysqli->error, E_USER_ERROR);
 		$tables = array();
-        $result = mysql_query("SHOW TABLES");
+        $result = $db->sql("SHOW TABLES");
 		$all = 0;
         while($row = $db->fetchArray($result)) {
 			$status = 0;
@@ -137,7 +137,7 @@ class dumper {
 
 		$tabs = count($tables);
 		// Определение размеров таблиц
-		$result = mysql_query("SHOW TABLE STATUS");
+		$result = $db->sql("SHOW TABLE STATUS");
 		$tabinfo = array();
 		$tabinfo[0] = 0;
 		$info = '';
@@ -159,18 +159,18 @@ class dumper {
 		$this->fn_write($fp, "#SKD101|{$db}|{$tabs}|" . date("Y.m.d H:i:s") ."|{$info}\n\n");
 		$t=0;
 		tpl_l(str_repeat("-", 60));
-		$result = mysql_query("SET SQL_QUOTE_SHOW_CREATE = 1");
+		$result = $db->sql("SET SQL_QUOTE_SHOW_CREATE = 1");
         foreach ($tables AS $table){
         	tpl_l("Обработка таблицы `{$table}` [" . fn_int($tabinfo[$table]) . "].");
 
         	// Создание таблицы
-			$result = mysql_query("SHOW CREATE TABLE {$table}");
+			$result = $db->sql("SHOW CREATE TABLE {$table}");
         	$tab = $db->fetchArray($result);
 			$tab = preg_replace('/(default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP|DEFAULT CHARSET=\w+|COLLATE=\w+|character set \w+|collate \w+)/i', '/*!40101 \\1 */', $tab);
         	$this->fn_write($fp, "DROP TABLE IF EXISTS {$table};\n{$tab[1]};\n\n");
         	// Опредеделяем типы столбцов
             $NumericColumn = array();
-            $result = mysql_query("SHOW COLUMNS FROM {$table}");
+            $result = $db->sql("SHOW COLUMNS FROM {$table}");
             $field = 0;
             while($col = $db->fetchRow($result)) {
             	$NumericColumn[$field++] = preg_match("/^(\w*int|year)/", $col[1]) ? 1 : 0;
@@ -185,7 +185,7 @@ class dumper {
 			}
 			$i = 0;
 			$this->fn_write($fp, "INSERT INTO `{$table}` VALUES");
-            while(($result = mysql_query("SELECT * FROM {$table} LIMIT {$from}, {$limit}")) && ($total = mysql_num_rows($result))){
+            while(($result = $db->sql("SELECT * FROM {$table} LIMIT {$from}, {$limit}")) && ($total = $db->affected_rows())){
             		while($row = $db->fetchRow($result)) {
                     	$i++;
     					$t++;
@@ -194,14 +194,14 @@ class dumper {
                     		if ($NumericColumn[$k])
                     		    $row[$k] = isset($row[$k]) ? $row[$k] : "NULL";
                     		else
-                    			$row[$k] = isset($row[$k]) ? "'" . mysql_escape_string($row[$k]) . "'" : "NULL";
+                    			$row[$k] = isset($row[$k]) ? "'" . $db->real_escape_string($row[$k]) . "'" : "NULL";
                     	}
 
     					$this->fn_write($fp, ($i == 1 ? "" : ",") . "\n(" . implode(", ", $row) . ")");
     					if ($i % $limit2 == 0)
     						tpl_s($i / $tabinfo[$table], $t / $tabinfo[0]);
                		}
-					mysql_free_result($result);
+					if ($result instanceof mysqli_result) $result->free();
 					if ($total < $limit) {
 					    break;
 					}
@@ -246,9 +246,9 @@ class dumper {
 		    exit;
 		}
 		tpl_l("Подключение к БД `{$db}`.");
-		mysql_select_db($db) or trigger_error ("Не удается выбрать базу данных.<BR>" . mysql_error(), E_USER_ERROR);
+		mysql_select_db($db) or trigger_error ("Не удается выбрать базу данных.<BR>" . $db->mysqli->error, E_USER_ERROR);
 
-		preg_match("/^(\d+)\.(\d+)\.(\d+)/", mysql_get_server_info(), $m);
+		preg_match("/^(\d+)\.(\d+)\.(\d+)/", $db->mysqli->server_info, $m);
 		$this->mysql_version = sprintf("%d%02d%02d", $m[1], $m[2], $m[3]);
 		// Определение формата файла
 		if(preg_match("/^(.+?)\.sql(\.(bz2|gz))?$/", $file, $matches)) {
@@ -351,9 +351,9 @@ class dumper {
             	}
     			if ($execute) {
             		$q++;
-            		mysql_query($sql) or trigger_error ("Неправильный запрос.<BR>" . mysql_error(), E_USER_ERROR);
+            		$db->sql($sql) or trigger_error ("Неправильный запрос.<BR>" . $db->mysqli->error, E_USER_ERROR);
 					if (preg_match("/^insert/i", $sql)) {
-            		    $aff_rows += mysql_affected_rows();
+            		    $aff_rows += $db->affected_rows();
             		}
             		$sql = '';
             		$query_len = 0;
@@ -408,23 +408,23 @@ class dumper {
 		if (DBNAMES != '') {
 			$items = explode(',', trim(DBNAMES));
 			foreach($items AS $item){
-    			if (mysql_select_db($item)) {
-    				$tables = mysql_query("SHOW TABLES");
+    			if ($db->mysqli->select_db($item)) {
+    				$tables = $db->sql("SHOW TABLES");
     				if ($tables) {
-    	  			    $tabs = mysql_num_rows($tables);
+    	  			    $tabs = $db->affected_rows();
     	  				$dbs[$item] = "{$item} ({$tabs})";
     	  			}
     			}
 			}
 		}
 		else {
-    		$result = mysql_query("SHOW DATABASES");
+    		$result = $db->sql("SHOW DATABASES");
     		$dbs = array();
     		while($item = $db->fetchArray($result)){
-    			if (mysql_select_db($item[0])) {
-    				$tables = mysql_query("SHOW TABLES");
+    			if ($db->mysqli->select_db($item[0])) {
+    				$tables = $db->sql("SHOW TABLES");
     				if ($tables) {
-    	  			    $tabs = mysql_num_rows($tables);
+    	  			    $tabs = $db->affected_rows();
     	  				$dbs[$item[0]] = "{$item[0]} ({$tabs})";
     	  			}
     			}

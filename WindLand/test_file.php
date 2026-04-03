@@ -55,7 +55,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `files` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=1 ;");
 
 }
-if(isset($_POST['trunk'])){ mysql_query("TRUNCATE TABLE `files`"); }
+if(isset($_POST['trunk'])){ $db->sql("TRUNCATE TABLE `files`"); }
 
 if(isset($_POST['scan']))scanFolder($_POST['dir']);
 
@@ -68,11 +68,11 @@ if(isset($_POST['findNew']))findNew($_POST['dir'],!isset($_POST['add'])?false:tr
 <?
 
 	function findMody($t=false,$mod = false){
-	$sql = mysql_query('SELECT * FROM files');
+	$sql = $db->sql('SELECT * FROM files');
 	while($file = $db->fetchAssoc($sql)){
 		if(!file_exists($file['folder'].'/'.$file['file'])){
 		if($mod){
-			mysql_query("DELETE FROM files WHERE id = '".$file['id']."' LIMIT 1;");
+			$db->sql("DELETE FROM files WHERE id = '".$file['id']."' LIMIT 1;");
 			echo "<font color=blue>Удален файл ".$file['folder'].'/'.$file['file']."</font>(запись удалена из базы)<br>";
 			}else{
 		echo "<font color=blue>Удален файл ".$file['folder'].'/'.$file['file']."</font><br>";
@@ -83,7 +83,7 @@ if(isset($_POST['findNew']))findNew($_POST['dir'],!isset($_POST['add'])?false:tr
 		if($stat['size']!=$file['size']	|| $stat['mtime']!=$file['mod']){
 
 			if($mod){
-			mysql_query("UPDATE files SET `size`='".$stat['size']."', `mod`='".$stat['mtime']."' WHERE `id` = '".$file['id']."' LIMIT 1;");
+			$db->sql("UPDATE files SET `size`='".$stat['size']."', `mod`='".$stat['mtime']."' WHERE `id` = '".$file['id']."' LIMIT 1;");
 			 echo "Файл ".$file['folder'].'/'.$file['file']." Был изменен ".date("d.m.Y H:i:s",$stat['mtime'])." (обновлен)</font><br>";
 			}else{
 			 echo "Файл ".$file['folder'].'/'.$file['file']." <font color=red>Был изменен ".date("d.m.Y H:i:s",$stat['mtime'])."</font><br>";
@@ -106,7 +106,7 @@ if(isset($_POST['findNew']))findNew($_POST['dir'],!isset($_POST['add'])?false:tr
 		scanFolder($dir.'/'.$file);}else
 	if(is_file($dir.'/'.$file)){
 		$stat = stat($dir.'/'.$file);
-		mysql_query("INSERT INTO files VALUES(NULL,'$dir','$file','".$stat['mtime']."','".$stat['size']."');");
+		$db->sql("INSERT INTO files VALUES(NULL,'$dir','$file','".$stat['mtime']."','".$stat['size']."');");
 	} else continue;
 	}
 }
@@ -115,7 +115,7 @@ if(isset($_POST['findNew']))findNew($_POST['dir'],!isset($_POST['add'])?false:tr
 		$exclude = array('..','.','phpmyadmin','logs','test','inv','cache','cache.php');
 		$files = @scandir($dir, 1);
 		if(empty($files))return;
-		$sql = mysql_query("SELECT file FROM files WHERE folder='$dir';");
+		$sql = $db->sql("SELECT file FROM files WHERE folder='$dir';");
 		while($row = $db->fetchAssoc($sql)){
 			$find = array_search($row['file'],$files);
 			if($find!==false) unset($files[$find]);
@@ -130,7 +130,7 @@ if(isset($_POST['findNew']))findNew($_POST['dir'],!isset($_POST['add'])?false:tr
 		echo 'найден новый фaйл'.$dir.'/'.$file.' (<b>'.$stat['size'].' байт</b> Дата изменения:'.date("d.m.Y H:i:s",$stat['mtime']).')<br>';
 		if($add){
 
-			mysql_query("INSERT INTO files VALUES(NULL,'$dir','$file','".$stat['mtime']."','".$stat['size']."');");
+			$db->sql("INSERT INTO files VALUES(NULL,'$dir','$file','".$stat['mtime']."','".$stat['size']."');");
 			}
 		} else continue;
 

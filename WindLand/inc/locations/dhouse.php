@@ -207,7 +207,7 @@ if (!$http->get["base"] == 'information' and !$http->get["s"] and !$http->get["c
 
 	if ($_FILTER["lavkasort"]!='tlevel') $_FILTER["lavkasort"]='price';
 	$enures= $db->sql("SELECT * FROM `weapons` WHERE `tlevel`>='".$_FILTER["lavkaminlevel"]."' and `tlevel`<='".$_FILTER["lavkamaxlevel"]."' and `dprice`<='".$_FILTER["lavkamaxcena"]."' and ".$stype." and `where_buy`='1' ORDER BY `".$_FILTER["lavkasort"]."` ASC");
-	while ($vesh = mysql_fetch_array ($enures))
+	while ($vesh = $db->fetchArray($enures))
 	{
 		echo "<div class=weapons_box>";
 		$disabled = '';

@@ -100,13 +100,13 @@ echo '<div class="but2"><table border="0" cellspacing="0" width="80%" class="but
 if ( $dragon and ($dragon>=1 or $dragon<=4) )
 {
 	$inst = $db->sql('SELECT * FROM `instant` WHERE `place` = "dungeon" and `level` = '.$dragon.';', __FILE__,__LINE__,__FUNCTION__,__CLASS__);
-	if ( @mysql_num_rows($inst)>0 )
+	if ( @$db->affected_rows()>0 )
 	{
 		$width = array();
 		$max = 0;
-		for ($r=0,$o=@mysql_num_rows($inst);$r<$o;$r++)
+		for ($r=0,$o=@$db->affected_rows();$r<$o;$r++)
 		{
-			$max = substr_count(mysql_result($inst,$r,'vs'),'|');
+			$max = substr_count($db->result($inst,'vs',$r),'|');
 			$width[$r]= $max * 15;
 			if ($r%2==1)
 			{
@@ -114,9 +114,9 @@ if ( $dragon and ($dragon>=1 or $dragon<=4) )
 			}
 		}
 		
-		for ($c=0,$d=@mysql_num_rows($inst);$c<$d;$c++)
+		for ($c=0,$d=@$db->affected_rows();$c<$d;$c++)
 		{
-			$inf = $db->sqla("SELECT * FROM instant WHERE ID=".mysql_result($inst,$c,'ID').";", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
+			$inf = $db->sqla("SELECT * FROM instant WHERE ID=".$db->result($inst,'ID',$c).";", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
 			$dinf = explode ('|',$inf["team"]);
 			if ( substr_count($inf["team"],'|')>=$inf["count"]-1 and !empty($dinf[0]) )
 			{
@@ -126,13 +126,13 @@ if ( $dragon and ($dragon>=1 or $dragon<=4) )
 		}
 		
 		echo '<table width="100%" border=0><tr>';
-		for ($a=0,$k=@mysql_num_rows($inst);$a<$k;$a++)
+		for ($a=0,$k=@$db->affected_rows();$a<$k;$a++)
 		{
 			if ($a>0 and $a%2==1) echo '<td></td>';
 			elseif ($a>0 and $a%2==0) echo '</tr><tr><td></td></tr><tr>';
 				
 			$vs = '';
-			$v = explode('|',mysql_result($inst,$a,'vs'));
+			$v = explode('|',$db->result($inst,'vs',$a));
 			$m = 0;
 			foreach ($v as $b)
 			{
@@ -143,7 +143,7 @@ if ( $dragon and ($dragon>=1 or $dragon<=4) )
 				$m++;
 			}
 			$team = '';
-			$v = explode('|',mysql_result($inst,$a,'team'));
+			$v = explode('|',$db->result($inst,'team',$a));
 			$m = 0;
 			if ( !empty($v[0]) )
 			{
@@ -156,27 +156,27 @@ if ( $dragon and ($dragon>=1 or $dragon<=4) )
 				}
 			} else $team = '<b>нет участников</b>';
 			
-			//if ( $player->pers['instant'] == mysql_result($inst,$a,'type') ) 
+			//if ( $player->pers['instant'] == $db->result($inst,'type',$a) ) 
 			
 			$is_some = $db->sql("SELECT * FROM instant WHERE team like '%".$player->pers["user"]."%'", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
-			if ( @mysql_num_rows($is_some)>0 )
+			if ( @$db->affected_rows()>0 )
 			{
 				$dis = ' disabled';
-				if ( $player->pers['instant'] == mysql_result($inst,$a,'type') ) $dis2 = ''; else $dis2 = ' disabled';
+				if ( $player->pers['instant'] == $db->result($inst,'type',$a) ) $dis2 = ''; else $dis2 = ' disabled';
 			} else 
 			{
 				$dis = '';
 				$dis2 = ' disabled';
 			}
 		//	$task = $db->sqla("SELECT * FROM quests WHERE uidp=".$player->pers["uid"]." and id='wizard_1' and task_to>".time()." and params<>'10|10|10';", __FILE__,__LINE__,__FUNCTION__,__CLASS__);
-			if ( ($player->pers["rank_i"]/2) > mysql_result($inst,$a,'rank') ) $dis = 'disabled';
+			if ( ($player->pers["rank_i"]/2) > $db->result($inst,'rank',$a) ) $dis = 'disabled';
 			echo '<td valign="top" class="but">
 				<form action="main.php?do=1&dragon='.$dragon.'&battle_action=1" method="POST">
 				<input type=hidden name="subroom" value="'.$dragon.'" />
-				<input type=hidden name="id" value="'.mysql_result($inst,$a,'ID').'" />
+				<input type=hidden name="id" value="'.$db->result($inst,'ID',$a).'" />
 				<table border="0" width="100%">
-					<tr><td colspan="3" align="center"><b>&laquo;'.mysql_result($inst,$a,'name').'&raquo;</b></td></tr>
-					<tr><td colspan="3" style="font-size:11px;">Количество участников: <b>'.mysql_result($inst,$a,'count').'</b></td></tr>
+					<tr><td colspan="3" align="center"><b>&laquo;'.$db->result($inst,'name',$a).'&raquo;</b></td></tr>
+					<tr><td colspan="3" style="font-size:11px;">Количество участников: <b>'.$db->result($inst,'count',$a).'</b></td></tr>
 					<tr height="100%">
 						<td valign="top" width="45%" style="padding-left:15px;font-size:11px">'.$team.'</td>
 						<td width="10%" align="center" valign=middle><b>VS</b></td>
