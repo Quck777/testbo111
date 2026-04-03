@@ -1,55 +1,30 @@
-```
+```gitignore
 # Compiled and build artifacts
 *.pyc
 __pycache__/
-*.o
-*.obj
-*.exe
-*.dll
-*.so
-*.a
-*.out
 
 # Dependencies
 vendor/
 node_modules/
-composer.lock
 
 # Logs and temp files
 *.log
 *.tmp
 *.swp
-*.swo
 
 # Environment
 .env
 .env.local
-.env.*
+*.env.*
 
 # Editors
 .vscode/
 .idea/
-*.sublime-workspace
 
-# System files
-.DS_Store
-Thumbs.db
-
-# Coverage and testing
-coverage/
-htmlcov/
-.coverage
-.pytest_cache/
-.mypy_cache/
-
-# Build directories
-dist/
-build/
-target/
-.gradle/
-
-# Database dumps (if they follow common patterns)
+# Database dumps
 *.sql
-*.dump
-*.backup
+
+# Backup/shell scripts (if generated)
+*.sh.bak
+*~
 ```

@@ -119,7 +119,7 @@ class Reg
 		
 	//	$this->db->sql('INSERT INTO `accaunts` (`id`, `e_mail`, `passwd`, `pers_pol`, `referer`) VALUES ('.$id.', "'.strtolower($this->email).'", "'.md5(base64_encode(md5($this->pass))).'", "'.$pol.'", '.$this->invit.'); ');
 		
-		if ( !mysql_error() )
+		if ( !$db->mysqli->error )
 		{
 			$this->db->sql('INSERT INTO `log_register_ipbase` (`ip`, `date`, `uid`) VALUES ("'.filter_var($this->ip, FILTER_SANITIZE_STRING).'", '.time().', '.$id.');');
 			if ($ref[0]==true) $this->db->sql('INSERT INTO `log_referals` (`uid`, `whoref`, `date`) VALUES ('.$id.', '.$ref[0].','.time().');');

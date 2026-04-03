@@ -46,7 +46,7 @@ if ($opt[2]=='z')$http->get['sort']='z';
 	}
 	if ( $http->_get('no_tip') )
 	{
-	//	mysql_query("INSERT INTO `no_tips` (`uid` , `tip_id`) VALUES (".$player->pers["uid"].", ".intval($_GET["no_tip"]).");");
+	//	$db->sql("INSERT INTO `no_tips` (`uid` , `tip_id`) VALUES (".$player->pers["uid"].", ".intval($_GET["no_tip"]).");");
 	}
 	###############################################################################
 	

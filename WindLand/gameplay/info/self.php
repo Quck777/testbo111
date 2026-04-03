@@ -86,7 +86,7 @@ else
 $rep = $db->sql("SELECT * FROM reports_for_users WHERE uid=".$player->pers["uid"]." ORDER BY date DESC");
 echo "rep_text +='<table border=0 width=320 cellspacing=0 cellpadding=0 class=fightlong><tr><td class=brdr>ฮาวÛยÛ: <a href=\"info.php?".$player->pers["user"]."&no_watch=1&&all_reports=1&self=1\" class=nt>[ยัล]</a></td></tr>';";
 $k = 0;
-while($r = mysql_fetch_assoc ($rep))
+while($r = $db->fetchAssoc($rep))
 {
 	$k++;
 	$del = 0;

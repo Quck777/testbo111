@@ -219,7 +219,7 @@ $ws6 = plus_param($ws6);
 if ($UD_ART<>$player->pers["is_art"]) set_vars("is_art=".$UD_ART."",UID);
 define ("UD_ART",$UD_ART);
 unset($v);
-mysql_free_result($res);
+if ($res instanceof mysqli_result) $res->free();
 unset($res);
 
 if ($t%10==0)

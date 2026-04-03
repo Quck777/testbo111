@@ -3,9 +3,9 @@
 Error_Reporting(0);
 require ($_SERVER['DOCUMENT_ROOT'].'/configs/config.php');
 include (ROOT.'/inc/functions.php');
-$res = mysql_connect ($mysqlhost,$mysqluser,$mysqlpass);
-mysql_select_db($mysqlbase, $res);
-mysql_query('SET NAMES cp1251');
+$res = new mysqli($mysqlhost, $mysqluser, $mysqlpass);
+$db->mysqli->select_db($mysqlbase);
+$db->sql('SET NAMES cp1251');
 
 	$you = catch_user(intval($_COOKIE['uid']),$_COOKIE["hashcode"],1);
 	if ( $you['priveleged']==0 and $_GET['service']==false )

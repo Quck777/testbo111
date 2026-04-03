@@ -108,7 +108,7 @@ if (@$_GET["give"])
 	else
 	$enures= $db->sql ("SELECT * FROM `weapons` WHERE `tlevel`>='".$_FILTER["lavkaminlevel"]."' and `tlevel`<='".$_FILTER["lavkamaxlevel"]."' and `price`<='".$_FILTER["lavkamaxcena"]."' ORDER BY `".$_FILTER["lavkasort"]."`,`where_buy` ASC");
 echo '<table border="1" width="100%" cellspacing="0" cellpadding="0" bordercolorlight=#C0C0C0 bordercolordark=#FFFFFF class=LinedTable>';
-while ($v=mysql_fetch_array ($enures,MYSQL_ASSOC)) 
+while ($v=$db->fetchArray($enures, MYSQLI_ASSOC)) 
 {
 	if( @$_GET["view"]!='l' )
 	{

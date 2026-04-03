@@ -288,8 +288,8 @@ if ($zakl and $zakl["manacost"]<=$_pers["cma"]/$req["magic_koef"])
 
 	set_vars("`cma`='".$_pers["cma"]."',`m".$zakl["type"]."`=".$_pers['m'.$zakl["type"]].",fexp=fexp+".intval($ALL_DAMAGE).",exp_in_f=".$_pers["exp_in_f"].",kills=".$_pers["kills"],$_pers["uid"]);
 	$db->sql("UPDATE `u_blasts` SET cur_colldown=".tme()."+colldown, cur_turn_colldown=turn_colldown+".$_pers["f_turn"]." WHERE id=".$zakl["id"]);
-	mysql_free_result($ps);
-	mysql_free_result($bs);
+	if ($ps instanceof mysqli_result) $ps->free();
+	if ($bs instanceof mysqli_result) $bs->free();
 
 	$_pers = catch_user($_pers["uid"]);
 

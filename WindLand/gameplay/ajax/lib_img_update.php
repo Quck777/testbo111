@@ -2,9 +2,9 @@
 	error_reporting(0);
 	include ($_SERVER['DOCUMENT_ROOT'].'/configs/config.php');
 	include (ROOT.'/inc/functions.php');
-	$main_conn = mysql_connect ($mysqlhost,$mysqluser,$mysqlpass,$mysqlbase);
-	mysql_select_db($mysqlbase, $main_conn);
-	mysql_query('SET NAMES cp1251');
+	$main_conn = new mysqli($mysqlhost, $mysqluser, $mysqlpass, $mysqlbase);
+	$db->mysqli->select_db($mysqlbase);
+	$db->sql('SET NAMES cp1251');
 	
 	$you = catch_user(intval($_COOKIE['uid']),$_COOKIE['hashcode'],1);
 	if(!$you["priveleged"]) die("<script>location='index.php';</script>");

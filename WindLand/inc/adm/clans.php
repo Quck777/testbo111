@@ -237,7 +237,7 @@ elseif ( isset($http->get['editor']) and !empty($http->get['editor']) )
 
 		echo "rep_text +='<table border=1 width=100% cellspacing=3 cellpadding=2 bordercolorlight=#C0C0C0 bordercolordark=#FFFFFF><tr><td class=brdr>ฮาวÛยÛ:<a href=\"main.php?editor=".$clan['sign']."&act=stena&all_reports=1\">(ยัล)</a></td></tr>';";
 		$k = 0;
-while($r = mysql_fetch_array ($rep))
+while($r = $db->fetchArray($rep))
 {
 	$k++;
 	echo "pr_r('".$r["who"]."',".$r["lvl"].",'".$r["sign"]."','".date("d.m.Y H:i",$r["date"])."','".str_replace('

@@ -14,7 +14,7 @@ function set_vars($vars,$uid)
 	if ( $vars )
 	{
 		$GLOBALS['db']->sql('UPDATE `users` SET '.$vars.' WHERE `uid` = '.intval($uid), __FILE__,__LINE__,__FUNCTION__,__CLASS__);
-		return mysql_affected_rows();
+		return $db->affected_rows();
 	} else return false;
 }
 
