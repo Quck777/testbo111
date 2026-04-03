@@ -1,0 +1,17 @@
+Deny From All
+
+<Files "*.jpg">
+	Allow From All
+</Files>
+
+<Files "*.png">
+	Allow From All
+</Files>
+
+<Files "*.gif">
+	Allow From All
+</Files>
+
+<Files "*.swf">
+	Allow From All
+</Files>
