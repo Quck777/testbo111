@@ -1,24 +1,17 @@
 ```
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
 # Compiled and build artifacts
 *.pyc
 __pycache__/
 *.o
 *.obj
+*.exe
+*.dll
+*.so
+*.a
 *.out
-dist/
-build/
-target/
 
 # Dependencies
+vendor/
 node_modules/
 venv/
 .venv/
@@ -26,15 +19,25 @@ venv/
 .env.local
 .env.*
 
-# Logs
+# Logs and temp files
 *.log
 *.tmp
+*.swp
 
 # Editors
 .vscode/
 .idea/
-*.swp
-*.swo
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Backup and dump files
+*.bak
+*.backup
+*.dump
+dumps/
+backup/
 
 # Compressed files
 *.zip
@@ -60,25 +63,6 @@ venv/
 *.tar.xz
 *.tar.zst
 
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
-
-# PHP specific
-*.php~
-
-# JavaScript/CSS generated
-*.min.js
-*.min.css
-
-# Database dumps
-*.sql.bak
-*.dump
-
-# Backup files
-*~
-*.bak
-*.backup
-
+# Web specific
+.htaccess
 ```
